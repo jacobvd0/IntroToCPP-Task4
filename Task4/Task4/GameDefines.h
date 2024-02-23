@@ -30,9 +30,9 @@ const char EXIT_ICON = '=';
 const int AIR = 5; // if there's no item
 
 // Room Descriptions
-//String EMPTY_DESC = "It’s an empty room, nothing to see here";
-//String ENEMY_DESC = "WATCH OUT! An enemy is nearby.";
-//String ITEM_DESC = "It looks like there's a chest here.";
-//String ITEM_DROPPED_DEC = "You left something here earlier.";
-//String EXIT_DESC = "You found the exit to go to the next floor!";
-//String ENTER_DESC = "You came in this way, it seems to be blocked off.";
+const String EMPTY_DESC = "It’s an empty room, nothing to see here";
+const String ENEMY_DESC = "WATCH OUT! An enemy is nearby.";
+const String ITEM_DESC = "It looks like there's a chest here.";
+const String ITEM_DROPPED_DEC = "You left something here earlier.";
+const String EXIT_DESC = "You found the exit to go to the next floor!";
+const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
