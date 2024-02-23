@@ -30,7 +30,7 @@ const char EXIT_ICON = '=';
 const int AIR = 5; // if there's no item
 
 // Room Descriptions
-const String EMPTY_DESC = "It’s an empty room, nothing to see here";
+const String EMPTY_DESC = "It's an empty room, nothing to see here";
 const String ENEMY_DESC = "WATCH OUT! An enemy is nearby.";
 const String ITEM_DESC = "It looks like there's a chest here.";
 const String ITEM_DROPPED_DEC = "You left something here earlier.";

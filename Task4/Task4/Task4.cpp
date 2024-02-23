@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Game.h"
+#include "GameDefines.h"
 
 int main()
 {
@@ -15,6 +16,8 @@ int main()
     }
 
     game.initializeMap();
+
+    std::cout << EMPTY_DESC.CStr() << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
