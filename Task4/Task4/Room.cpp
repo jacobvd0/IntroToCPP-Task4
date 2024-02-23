@@ -1,5 +1,6 @@
 #include "Room.h"
 #include "GameDefines.h"
+#include <iostream>
 
 Room::Room()
 {
@@ -34,13 +35,33 @@ int Room::getItem()
 
 void Room::draw()
 {
+	switch (m_type) {
+	case EMPTY:
+		std::cout << EMPTY_ICON << " ";
+		break;
+	case ENEMY:
+		std::cout << ENEMY_ICON << " ";
+		break;
+	case ITEM:
+		std::cout << ITEM_ICON << " ";
+		break;
+	case ITEM_DROPPED:
+		std::cout << ITEM_DROPPED_ICON << " ";
+		break;
+	case ENTER:
+		std::cout << ENTER_ICON << " ";
+		break;
+	case EXIT:
+		std::cout << EXIT_ICON << " ";
+		break;
+	}
 }
 
 void Room::drawDescription()
 {
 }
 
-void Room::setPosition()
+void Room::setPosition(Point2D pos)
 {
 }
 

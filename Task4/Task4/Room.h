@@ -16,7 +16,7 @@ public:
 	void draw();
 	void drawDescription();
 
-	void setPosition();
+	void setPosition(Point2D pos);
 	void executeCommand();
 private:
 	void pickup();
