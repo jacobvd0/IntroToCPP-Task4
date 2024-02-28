@@ -15,7 +15,11 @@ int main()
         return 0;
     }
 
+    std::cout << CSI << "4M" << CSI << "4L" << std::endl;
     game.initializeMap();
+
+    /*std::cout << CSI << "0" << ";" << "0" << "H";
+    std::cout << "T";*/
 
 }
 

@@ -12,6 +12,11 @@ Game::~Game()
 {
 }
 
+bool Game::isGameOver()
+{
+    return m_gameOver;
+}
+
 bool Game::enableVirtualTerminal()
 {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -34,7 +39,7 @@ void Game::initializeMap()
     srand(time(NULL));
     for (int h = 0; h < STARTER_MAP_HEIGHT; h++) {
         for (int w = 0; w < STARTER_MAP_WIDTH; w++) {
-            m_map[h][w].setPosition(Point2D{h, w});
+            m_map[h][w].setPosition(Point2D{w, h});
 
             int type = rand() % (MAX_RANDOM_TYPE * 2);
             if (type < MAX_RANDOM_TYPE) {
@@ -47,8 +52,12 @@ void Game::initializeMap()
 
             m_map[h][w].draw();
         }
-        std::cout << "\n";
     }
+
+    m_map[0][0].setType(ENTER);
+    m_map[0][0].draw();
+    m_map[STARTER_MAP_HEIGHT-1][STARTER_MAP_WIDTH-1].setType(EXIT);
+    m_map[STARTER_MAP_HEIGHT-1][STARTER_MAP_WIDTH-1].draw();
 }
 
 void Game::drawMap()

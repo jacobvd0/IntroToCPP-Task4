@@ -35,24 +35,26 @@ int Room::getItem()
 
 void Room::draw()
 {
+	std::cout << CSI << m_location.y + 1 << ";" << m_location.x * 4 + 2 << "H";
+
 	switch (m_type) {
 	case EMPTY:
-		std::cout << EMPTY_ICON << " ";
+		std::cout << GREY << "[" << RESET_COLOR << EMPTY_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	case ENEMY:
-		std::cout << ENEMY_ICON << " ";
+		std::cout << GREY << "[" << RED << ENEMY_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	case ITEM:
-		std::cout << ITEM_ICON << " ";
+		std::cout << GREY << "[" << YELLOW << ITEM_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	case ITEM_DROPPED:
-		std::cout << ITEM_DROPPED_ICON << " ";
+		std::cout << GREY << "[" << RESET_COLOR << ITEM_DROPPED_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	case ENTER:
-		std::cout << ENTER_ICON << " ";
+		std::cout << GREY << "[" << LIGHT_GREY << ENTER_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	case EXIT:
-		std::cout << EXIT_ICON << " ";
+		std::cout << GREY << "[" << LIGHT_GREY << EXIT_ICON << GREY << "] " << RESET_COLOR;
 		break;
 	}
 }
@@ -63,6 +65,7 @@ void Room::drawDescription()
 
 void Room::setPosition(Point2D pos)
 {
+	m_location = pos;
 }
 
 void Room::executeCommand()
