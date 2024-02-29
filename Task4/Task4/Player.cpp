@@ -21,16 +21,19 @@ Player::~Player()
 {
 }
 
+// Gets the current position of the player
 Point2D Player::GetPosition()
 {
 	return m_playerPos; 
 }
 
+// Sets the player's position
 void Player::SetPosition(Point2D pos)
 {
 	m_playerPos = pos;
 }
 
+// Draws the player on the map
 void Player::draw()
 {
 	std::cout << CSI << m_playerPos.y + 1 << ";" << m_playerPos.x * 4 + 2 << "H";

@@ -13,26 +13,31 @@ Room::~Room()
 {
 }
 
+// Sets the room's type
 void Room::setType(int type)
 {
 	m_type = type;
 }
 
+// Gets the room's type
 int Room::getType()
 {
 	return m_type;
 }
 
+// Sets the item in the room (usually used if a player drops an item in the room)
 void Room::setItem(int item)
 {
 	m_item = item;
 }
 
+// Gets the dropped item in the room
 int Room::getItem()
 {
 	return m_item;
 }
 
+// Draws the room on the map
 void Room::draw()
 {
 	std::cout << CSI << m_location.y + 1 << ";" << m_location.x * 4 + 2 << "H";
@@ -59,6 +64,7 @@ void Room::draw()
 	}
 }
 
+// Draws the room's description under the map
 void Room::drawDescription()
 {
 	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
@@ -87,6 +93,7 @@ void Room::drawDescription()
 	}
 }
 
+// Sets the room's position
 void Room::setPosition(Point2D pos)
 {
 	m_location = pos;

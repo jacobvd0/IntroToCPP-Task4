@@ -12,11 +12,13 @@ Game::~Game()
 {
 }
 
+// Checks if the game has ended (player died)
 bool Game::isGameOver()
 {
     return m_gameOver;
 }
 
+// Enables the virtual terminal
 bool Game::enableVirtualTerminal()
 {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -34,6 +36,7 @@ bool Game::enableVirtualTerminal()
     return true;
 }
 
+// Initializes the starter map with random rooms
 void Game::initializeMap()
 {
     srand(time(NULL));
@@ -65,6 +68,7 @@ void Game::drawMap()
 {
 }
 
+// Game update loop
 void Game::update()
 {
     Point2D playerPos = m_player.GetPosition();
@@ -75,6 +79,7 @@ void Game::update()
     
 }
 
+// Gets input from the player
 void Game::getCommand()
 {
     Point2D playerPos = m_player.GetPosition();
