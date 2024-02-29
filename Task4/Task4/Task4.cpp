@@ -14,7 +14,6 @@ int main()
         return 0;
     }
 
-    std::cout << CSI << "4M" << CSI << "4L" << std::endl;
     game.initializeMap();
 
     while (!game.isGameOver()) {

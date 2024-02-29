@@ -3,6 +3,9 @@
 #include <iostream>
 #include "GameDefines.h"
 #include "Point2D.h"
+#include "OldSword.h"
+#include <windows.h>
+#include <shellapi.h>
 
 Game::Game()
 {
@@ -85,7 +88,9 @@ void Game::getCommand()
     Point2D playerPos = m_player.GetPosition();
 
     std::cout << "What do you want to do?\n";
+    std::cout << YELLOW;
     String input = input.ReadFromConsole();
+    std::cout << RESET_COLOR;
     if (input == "move down") {
         if (playerPos.y != STARTER_MAP_HEIGHT - 1)
             m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
@@ -101,6 +106,16 @@ void Game::getCommand()
     else if (input == "move right") {
         if (playerPos.x != STARTER_MAP_WIDTH - 1)
             m_player.SetPosition(Point2D{ playerPos.x + 1, playerPos.y });
+    }
+    else if (input == "use old sword") {
+        testSword.Use();
+    }
+    else if (input == "inspect old sword") {
+        testSword.Inspect();
+    }
+    else if (input == "/minecraft") {
+        // Riley's fault this exists
+        ShellExecute(0, 0, L"https://minecraft.net/download", 0, 0, SW_SHOW);
     }
     m_map[playerPos.y][playerPos.x].draw();
     m_player.draw();

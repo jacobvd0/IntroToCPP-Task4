@@ -367,6 +367,8 @@ String& String::operator=(const String& _str)
 	// Get the length of the inputted string + 1 to store \0
 	int length = strlen(_str.CStr()) + 1;
 
+	delete[] m_string;
+
 	// Setup a new array
 	m_string = new char[length];
 

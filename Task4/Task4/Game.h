@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "GameDefines.h"
 #include "Player.h"
+#include "OldSword.h"
 
 class Game
 {
@@ -17,6 +18,8 @@ public:
 	void update();
 
 private:
+	OldSword testSword; // temporary item until inventory is added
+
 	void getCommand();
 	int m_currentFloor = 0;
 	Room m_map[STARTER_MAP_HEIGHT][STARTER_MAP_WIDTH];

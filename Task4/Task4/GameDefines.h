@@ -53,3 +53,4 @@ const char* const YELLOW = "\x1b[93m";
 const char* const GREY = "\x1b[38;5;8m";
 const char* const LIGHT_GREY = "\x1b[38;5;248m";
 const char* const GREEN = "\x1b[38;5;2m";
+const char* const WHITE = "\x1b[38;5;15m";
