@@ -24,6 +24,9 @@ const char ENTER_ICON = '@';
 const int EXIT = 4;
 const char EXIT_ICON = '=';
 
+// Player icon
+const char PLAYER_ICON = 'P';
+
 // Dropped item aren't generated
 const int ITEM_DROPPED = 5;
 const char ITEM_DROPPED_ICON = '$';
@@ -49,3 +52,4 @@ const char* const RED = "\x1b[91m";
 const char* const YELLOW = "\x1b[93m";
 const char* const GREY = "\x1b[38;5;8m";
 const char* const LIGHT_GREY = "\x1b[38;5;248m";
+const char* const GREEN = "\x1b[38;5;2m";

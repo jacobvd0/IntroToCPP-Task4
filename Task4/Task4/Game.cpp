@@ -55,11 +55,48 @@ void Game::initializeMap()
     }
 
     m_map[0][0].setType(ENTER);
-    m_map[0][0].draw();
+    m_player.draw();
     m_map[STARTER_MAP_HEIGHT-1][STARTER_MAP_WIDTH-1].setType(EXIT);
     m_map[STARTER_MAP_HEIGHT-1][STARTER_MAP_WIDTH-1].draw();
+    m_map[0][0].drawDescription();
 }
 
 void Game::drawMap()
 {
+}
+
+void Game::update()
+{
+    Point2D playerPos = m_player.GetPosition();
+
+    m_map[playerPos.y][playerPos.x].drawDescription();
+
+    getCommand();
+    
+}
+
+void Game::getCommand()
+{
+    Point2D playerPos = m_player.GetPosition();
+
+    std::cout << "What do you want to do?\n";
+    String input = input.ReadFromConsole();
+    if (input == "move down") {
+        if (playerPos.y != STARTER_MAP_HEIGHT - 1)
+            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
+    }
+    else if (input == "move up") {
+        if (playerPos.y != 0)
+            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y - 1 });
+    }
+    else if (input == "move left") {
+        if (playerPos.x != 0)
+            m_player.SetPosition(Point2D{ playerPos.x - 1, playerPos.y });
+    }
+    else if (input == "move right") {
+        if (playerPos.x != STARTER_MAP_WIDTH - 1)
+            m_player.SetPosition(Point2D{ playerPos.x + 1, playerPos.y });
+    }
+    m_map[playerPos.y][playerPos.x].draw();
+    m_player.draw();
 }

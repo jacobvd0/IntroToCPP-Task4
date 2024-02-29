@@ -61,6 +61,30 @@ void Room::draw()
 
 void Room::drawDescription()
 {
+	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+	//std::cout << CSI << MAX_MAP_HEIGHT + 3 << ";" << 1 << "H";
+
+	switch (m_type) {
+	case EMPTY:
+		std::cout << "It's an empty room, nothing to see here.\n";
+		break;
+	case ENEMY:
+		std::cout << "WATCH OUT! An enemy is nearby.\n";
+		break;
+	case ITEM:
+		std::cout << "It looks like there's a chest here.\n";
+		break;
+	case ITEM_DROPPED:
+		std::cout << "You left something here earlier.\n";
+		break;
+	case ENTER:
+		std::cout << "You came in this way, it seems to be blocked off.\n";
+		break;
+	case EXIT:
+		std::cout << "You found the exit to go to the next floor!\n";
+		break;
+	}
 }
 
 void Room::setPosition(Point2D pos)
