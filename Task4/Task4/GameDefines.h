@@ -48,6 +48,7 @@ const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
 const char* const CSI = "\x1b[";
 
 const char* const RESET_COLOR = "\x1b[0m";
+const char* const HIDE_INPUT = "\x1b[38;5;0m"; // makes the text black so it blends in with the console
 const char* const RED = "\x1b[91m";
 const char* const YELLOW = "\x1b[93m";
 const char* const GREY = "\x1b[38;5;8m";

@@ -28,7 +28,9 @@ void OldSword::Use()
 		std::cout << "Press Enter to continue\n";
 		std::cin.clear();
 		std::cin.ignore(std::cin.rdbuf()->in_avail());
+		std::cout << HIDE_INPUT;
 		std::cin.get();
+		std::cout << RESET_COLOR;
 	}
 	else {
 		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
@@ -39,7 +41,9 @@ void OldSword::Use()
 		std::cout << "Press Enter to continue\n";
 		std::cin.clear();
 		std::cin.ignore(std::cin.rdbuf()->in_avail());
+		std::cout << HIDE_INPUT;
 		std::cin.get();
+		std::cout << RESET_COLOR;
 	}
 	
 }

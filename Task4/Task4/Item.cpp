@@ -20,7 +20,9 @@ void Item::Use()
     std::cout << "Press Enter to continue\n";
     std::cin.clear();
     std::cin.ignore(std::cin.rdbuf()->in_avail());
+    std::cout << HIDE_INPUT;
     std::cin.get();
+    std::cout << RESET_COLOR;
 }
 
 void Item::Inspect()
@@ -35,7 +37,9 @@ void Item::Inspect()
     std::cout << "Press Enter to continue\n";
     std::cin.clear();
     std::cin.ignore(std::cin.rdbuf()->in_avail());
+    std::cout << HIDE_INPUT;
     std::cin.get();
+    std::cout << RESET_COLOR;
     std::cout << CSI << MAX_MAP_HEIGHT + 6 << ";" << 1 << "H";
     std::cout << CSI << "6M" << CSI << "6L" << std::endl;
 }
