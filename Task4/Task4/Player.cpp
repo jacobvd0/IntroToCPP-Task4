@@ -41,3 +41,13 @@ void Player::draw()
 	std::cout << GREY << "[" << GREEN << PLAYER_ICON << GREY << "] " << RESET_COLOR;
 	//std::cout << "Drawn to " << m_playerPos.y + 1 << " " << m_playerPos.x * 4 + 2;
 }
+
+void Player::useItem(int item)
+{
+	for (int i = 0; i < 5; i++) {
+		if (i == item) {
+			// confirmed that the player has the item in their inv
+			// run the use function here
+		}
+	}
+}

@@ -91,32 +91,53 @@ void Game::getCommand()
     std::cout << YELLOW;
     String input = input.ReadFromConsole();
     std::cout << RESET_COLOR;
-    if (input == "move down") {
-        if (playerPos.y != STARTER_MAP_HEIGHT - 1)
-            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
+    
+    // Checks if the player wants to move
+    if (input.Find("move") == 0) {
+        // Down/South
+        if (input.Find("down") != -1 || input.Find("south") != -1){
+            if (playerPos.y != STARTER_MAP_HEIGHT - 1)
+                m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
+        }
+        // Up/North
+        else if (input.Find("up") != -1 || input.Find("north") != -1) {
+            if (playerPos.y != 0)
+                m_player.SetPosition(Point2D{ playerPos.x, playerPos.y - 1 });
+        }
+        // Left/West
+        else if (input.Find("left") != -1 || input.Find("west") != -1) {
+            if (playerPos.x != 0)
+                m_player.SetPosition(Point2D{ playerPos.x - 1, playerPos.y });
+        }
+        // Right/East
+        else if (input.Find("right") != -1 || input.Find("east") != -1) {
+            if (playerPos.x != STARTER_MAP_WIDTH - 1)
+                m_player.SetPosition(Point2D{ playerPos.x + 1, playerPos.y });
+        }
     }
-    else if (input == "move up") {
-        if (playerPos.y != 0)
-            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y - 1 });
-    }
-    else if (input == "move left") {
-        if (playerPos.x != 0)
-            m_player.SetPosition(Point2D{ playerPos.x - 1, playerPos.y });
-    }
-    else if (input == "move right") {
-        if (playerPos.x != STARTER_MAP_WIDTH - 1)
-            m_player.SetPosition(Point2D{ playerPos.x + 1, playerPos.y });
-    }
-    else if (input == "use old sword") {
+
+    // Checks if the player wants to use an item
+    else if (input.Find("use") == 0) {
+        // check what item here
         testSword.Use();
     }
-    else if (input == "inspect old sword") {
+    
+    // Checks if the player wants to inspect an item
+    else if (input.Find("inspect") == 0) {
+        // check what item here
         testSword.Inspect();
     }
+
+
+
+
+
+
     else if (input == "/minecraft") {
         // Riley's fault this exists
         ShellExecute(0, 0, L"https://minecraft.net/download", 0, 0, SW_SHOW);
     }
+
     m_map[playerPos.y][playerPos.x].draw();
     m_player.draw();
 }
