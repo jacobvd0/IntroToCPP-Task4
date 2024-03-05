@@ -89,13 +89,13 @@ void Game::getCommand()
 
     std::cout << "What do you want to do?\n";
     std::cout << YELLOW;
-    String input = input.ReadFromConsole();
+    String input = input.ReadFromConsole().ToLower();
     std::cout << RESET_COLOR;
     
     // Checks if the player wants to move
     if (input.Find("move") == 0) {
         // Down/South
-        if (input.Find("down") != -1 || input.Find("south") != -1){
+        if (input.Find("down") != -1 || input.Find("south") != -1) {
             if (playerPos.y != STARTER_MAP_HEIGHT - 1)
                 m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
         }
@@ -119,11 +119,15 @@ void Game::getCommand()
     // Checks if the player wants to use an item
     else if (input.Find("use") == 0) {
         // check what item here
-        testSword.Use();
+        //testSword.Use();
+
+        if (input.Find("old sword") != -1) {
+            m_player.useItem(OLD_SWORD);
+        }
     }
-    
+
     // Checks if the player wants to inspect an item
-    else if (input.Find("inspect") == 0) {
+    else if (input.Find("inspect") == 0 && input[0] == 'i') {
         // check what item here
         testSword.Inspect();
     }

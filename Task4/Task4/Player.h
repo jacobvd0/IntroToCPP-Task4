@@ -13,6 +13,7 @@ public:
 	void SetPosition(Point2D pos);
 	void draw();
 	void useItem(int item);
+	bool pickup(int item);
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];

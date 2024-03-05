@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameDefines.h"
 #include <iostream>
+#include "OldSword.h"
 
 Player::Player()
 {
@@ -45,9 +46,16 @@ void Player::draw()
 void Player::useItem(int item)
 {
 	for (int i = 0; i < 5; i++) {
-		if (i == item) {
+		if (m_inventory[i] == item) {
 			// confirmed that the player has the item in their inv
 			// run the use function here
+
+			switch (item) {
+			case OLD_SWORD:
+				OldSword oldsword;
+				oldsword.Use();
+				break;
+			}
 		}
 	}
 }

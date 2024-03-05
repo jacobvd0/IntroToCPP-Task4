@@ -45,6 +45,12 @@ const String EXIT_DESC = "You found the exit to go to the next floor!";
 const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
 
 
+// Items
+const int OLD_SWORD = 20;
+const int SWORD = 21;
+
+
+
 const char* const CSI = "\x1b[";
 
 const char* const RESET_COLOR = "\x1b[0m";
