@@ -59,3 +59,8 @@ void Player::useItem(int item)
 		}
 	}
 }
+
+bool Player::pickup(int item)
+{
+	return false;
+}
