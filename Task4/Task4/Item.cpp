@@ -11,7 +11,7 @@ Item::~Item()
 {
 }
 
-void Item::Use()
+void Item::Use(Room& room, Player& plr)
 {
     std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
     std::cout << CSI << "4M" << CSI << "4L" << std::endl;

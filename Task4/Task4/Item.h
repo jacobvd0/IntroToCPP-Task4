@@ -1,12 +1,14 @@
 #pragma once
 #include "String.h"
+#include "Room.h"
+#include "Player.h"
 class Item
 {
 public:
 	Item();
 	~Item();
 
-	virtual void Use();
+	virtual void Use(Room& room, Player& plr);
 	virtual void Inspect();
 
 	String GetDescription();

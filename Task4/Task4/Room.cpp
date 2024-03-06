@@ -103,6 +103,31 @@ void Room::executeCommand()
 {
 }
 
+void Room::dealDamage(int dmg)
+{
+	m_enemyHP -= dmg;
+	if (m_enemyHP < 0)
+		m_enemyHP = 0;
+
+	if (m_enemyHP == 0)
+		m_type = EMPTY;
+}
+
+void Room::attackPlayer()
+{
+	
+}
+
+int Room::getEnemyHP()
+{
+	return m_enemyHP;
+}
+
+int Room::getEnemyMaxHP()
+{
+	return m_maxHP;
+}
+
 void Room::pickup()
 {
 }

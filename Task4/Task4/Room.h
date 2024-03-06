@@ -18,11 +18,19 @@ public:
 
 	void setPosition(Point2D pos);
 	void executeCommand();
+
+	void dealDamage(int dmg);
+	void attackPlayer();
+
+	int getEnemyHP();
+	int getEnemyMaxHP();
 private:
 	void pickup();
 
 	Point2D m_location;
 	int m_item;
 	int m_type;
+	int m_enemyHP = 30;
+	int m_maxHP = 30;
 };
 

@@ -6,16 +6,25 @@
 Player::Player()
 {
 	m_playerPos = Point2D{0,0};
+	for (int i = 0; i < 5; i++) {
+		m_inventory[i] = EMPTY;
+	}
 }
 
 Player::Player(Point2D pos)
 {
 	m_playerPos = pos;
+	for (int i = 0; i < 5; i++) {
+		m_inventory[i] = EMPTY;
+	}
 }
 
 Player::Player(int x, int y)
 {
 	m_playerPos = Point2D{ x, y };
+	for (int i = 0; i < 5; i++) {
+		m_inventory[i] = EMPTY;
+	}
 }
 
 Player::~Player()
@@ -43,7 +52,7 @@ void Player::draw()
 	//std::cout << "Drawn to " << m_playerPos.y + 1 << " " << m_playerPos.x * 4 + 2;
 }
 
-void Player::useItem(int item)
+void Player::useItem(int item, Room& room, Player& plr)
 {
 	for (int i = 0; i < 5; i++) {
 		if (m_inventory[i] == item) {
@@ -52,8 +61,8 @@ void Player::useItem(int item)
 
 			switch (item) {
 			case OLD_SWORD:
-				OldSword oldsword;
-				oldsword.Use();
+				OldSword m_oldsword;
+				m_oldsword.Use(room, plr);
 				break;
 			}
 		}
@@ -62,5 +71,11 @@ void Player::useItem(int item)
 
 bool Player::pickup(int item)
 {
+	for (int i = 0; i < 5; i++) {
+		if (m_inventory[i] == EMPTY) {
+			m_inventory[i] = item;
+			return true;
+		}
+	}
 	return false;
 }

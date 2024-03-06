@@ -120,9 +120,10 @@ void Game::getCommand()
     else if (input.Find("use") == 0) {
         // check what item here
         //testSword.Use();
+        Point2D playerPos = m_player.GetPosition();
 
         if (input.Find("old sword") != -1) {
-            m_player.useItem(OLD_SWORD);
+            m_player.useItem(OLD_SWORD, *m_map[playerPos.y, playerPos.x], m_player);
         }
     }
 
@@ -130,6 +131,10 @@ void Game::getCommand()
     else if (input.Find("inspect") == 0 && input[0] == 'i') {
         // check what item here
         testSword.Inspect();
+    }
+
+    else if (input == "give sword") {
+        m_player.pickup(OLD_SWORD);
     }
 
 
