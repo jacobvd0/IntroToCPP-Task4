@@ -16,6 +16,10 @@ public:
 	void draw();
 	void useItem(int item, Room& room, Player& plr);
 	bool pickup(int item);
+
+	int getHealth();
+	int getMaxHealth();
+	void dealDamage(int dmg);
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];

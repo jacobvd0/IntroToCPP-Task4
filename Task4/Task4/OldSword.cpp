@@ -25,6 +25,7 @@ void OldSword::Use(Room& room, Player& plr)
 
 		room.dealDamage(dmg);
 		std::cout << "You used your old sword... \nIt delt " << dmg << " damage!\n";
+		std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 		//m_usesLeft--;
 		
@@ -38,7 +39,7 @@ void OldSword::Use(Room& room, Player& plr)
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
-		room.attackPlayer();
+		room.attackPlayer(plr);
 	//}
 	//else {
 	//	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";

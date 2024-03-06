@@ -1,5 +1,6 @@
 #pragma once
 #include "Point2D.h"
+//#include "Player.h"
 
 class Room
 {
@@ -20,7 +21,7 @@ public:
 	void executeCommand();
 
 	void dealDamage(int dmg);
-	void attackPlayer();
+	void attackPlayer(Player& plr);
 
 	int getEnemyHP();
 	int getEnemyMaxHP();

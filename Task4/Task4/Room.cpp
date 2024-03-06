@@ -113,7 +113,7 @@ void Room::dealDamage(int dmg)
 		m_type = EMPTY;
 }
 
-void Room::attackPlayer()
+void Room::attackPlayer(Player& plr)
 {
 	
 }

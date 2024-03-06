@@ -79,3 +79,20 @@ bool Player::pickup(int item)
 	}
 	return false;
 }
+
+int Player::getHealth()
+{
+	return m_health;
+}
+
+int Player::getMaxHealth()
+{
+	return m_maxhealth;
+}
+
+void Player::dealDamage(int dmg)
+{
+	m_health -= dmg;
+	if (m_health < 0)
+		m_health = 0;
+}
