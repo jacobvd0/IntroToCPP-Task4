@@ -4,6 +4,7 @@
 String::String()
 {
 	m_string = new char[1];
+	m_string[0] = '\0';
 }
 
 // Function to allow setting the string
@@ -254,7 +255,7 @@ String String::Replace(const String& _find, const String& _replace)
 
 	// Loop through and check for all instances of the string and add the word to replace to the temp array instead
 	while (true) {
-		int strLocation = tmp.Find(locationToCheck, _find);
+		int strLocation = Find(locationToCheck, _find);
 		if (strLocation != -1) {
 			locationToCheck = strLocation + _replace.Length();
 
@@ -266,16 +267,36 @@ String String::Replace(const String& _find, const String& _replace)
 				tmpArray[replacingLoc] = _replace.CStr()[i];
 				replacingLoc++;
 			}
+			for (int i = strLocation + strlen(_find.m_string); i <= Length(); i++)
+			{
+				tmpArray[replacingLoc] = m_string[i];
+				replacingLoc++;
+			}
 
+			//write rest of data after replace string written (everything in m_string after find)
+			delete[] m_string;
+			m_string = new char[strlen(tmpArray) + 1];
+			strcpy_s(m_string, strlen(tmpArray) + 1, tmpArray);
+			replacingLoc = 0;
 		}
 		else {
 			break;
 		}
 	}
 
+	//for (int i = replacingLoc; i < strlen(m_string); i++) {
+	//	tmpArray[replacingLoc] = m_string[replacingLoc];
+	//	replacingLoc++;
+
+	//}
+
 	tmpArray[replacingLoc] = '\0';
 
-	String convertedStr = tmpArray;
+	String convertedStr(m_string);
+	delete[] m_string;
+	m_string = new char[tmp.Length() + 1];
+	strcpy_s(m_string, tmp.Length() + 1, tmp.m_string);
+
 	return convertedStr;
 
 
@@ -367,6 +388,7 @@ String& String::operator=(const String& _str)
 	// Get the length of the inputted string + 1 to store \0
 	int length = strlen(_str.CStr()) + 1;
 
+	// Remove the old string
 	delete[] m_string;
 
 	// Setup a new array

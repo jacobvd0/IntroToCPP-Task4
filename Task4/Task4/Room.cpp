@@ -1,6 +1,7 @@
 #include "Room.h"
 #include "GameDefines.h"
 #include <iostream>
+#include "Player.h"
 
 Room::Room()
 {
@@ -115,7 +116,24 @@ void Room::dealDamage(int dmg)
 
 void Room::attackPlayer(Player& plr)
 {
-	
+	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+	int dmg = 3;
+	plr.dealDamage(dmg);
+
+	std::cout << "You were attacked! \nYou took " << dmg << " damage!\n";
+	std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
+	std::cout << "Enemy HP: " << getEnemyHP() << "/" << getEnemyMaxHP() << std::endl;
+	//m_usesLeft--;
+
+	std::cout << "Press Enter to continue\n";
+	std::cin.clear();
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::cout << HIDE_INPUT;
+	std::cin.get();
+	std::cout << RESET_COLOR;
+	std::cout << CSI << MAX_MAP_HEIGHT + 7 << ";" << 1 << "H";
+	std::cout << CSI << "7M" << CSI << "7L" << std::endl;
 }
 
 int Room::getEnemyHP()

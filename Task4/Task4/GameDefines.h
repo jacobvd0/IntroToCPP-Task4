@@ -47,7 +47,7 @@ const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
 
 // Items
 const int OLD_SWORD = 20;
-const int SWORD = 21;
+const int WOOD_SWORD = 21;
 
 
 

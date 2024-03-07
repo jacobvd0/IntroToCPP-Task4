@@ -2,6 +2,7 @@
 #include "GameDefines.h"
 #include <iostream>
 #include "OldSword.h"
+#include "WoodenSword.h"
 
 Player::Player()
 {
@@ -56,15 +57,41 @@ void Player::useItem(int item, Room& room, Player& plr)
 {
 	for (int i = 0; i < 5; i++) {
 		if (m_inventory[i] == item) {
+			OldSword oldSword;
+			WoodenSword woodSword;
 			// confirmed that the player has the item in their inv
 			// run the use function here
 
 			switch (item) {
 			case OLD_SWORD:
-				OldSword m_oldsword;
-				m_oldsword.Use(room, plr);
+				oldSword.Use(room, plr);
+				break;
+			case WOOD_SWORD:
+				woodSword.Use(room, plr);
 				break;
 			}
+		}
+	}
+}
+
+void Player::inspectItem(int item)
+{
+	for (int i = 0; i < 5; i++) {
+		if (m_inventory[i] == item) {
+			OldSword oldSword;
+			WoodenSword woodSword;
+			// confirmed that the player has the item in their inv
+			// run the use function here
+
+			switch (item) {
+			case OLD_SWORD:
+				oldSword.Inspect();
+				break;
+			case WOOD_SWORD:
+				woodSword.Inspect();
+				break;
+			}
+
 		}
 	}
 }

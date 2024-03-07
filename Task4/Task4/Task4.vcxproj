@@ -134,6 +134,7 @@
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task4.cpp" />
+    <ClCompile Include="WoodenSword.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="WoodenSword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

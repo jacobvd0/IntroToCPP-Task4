@@ -1,32 +1,30 @@
-#include "OldSword.h"
+#include "WoodenSword.h"
 #include <iostream>
 #include "GameDefines.h"
 #include "Player.h"
 
-OldSword::OldSword()
+WoodenSword::WoodenSword()
 {
 	SetDescription(m_itemDescription);
 	SetName(m_itemName);
-
-	//m_usesLeft = 30;
 }
 
-OldSword::~OldSword()
+WoodenSword::~WoodenSword()
 {
 }
 
-void OldSword::Use(Room& room, Player& plr)
+void WoodenSword::Use(Room& room, Player& plr)
 {
 	int roomType = room.getType();
-	
+
 	if (roomType == ENEMY) {
 		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 		srand(time(NULL));
-		int dmg = (rand() % 5) + 2;
+		int dmg = (rand() % m_dmgMax) + m_dmgMin;
 
 		room.dealDamage(dmg);
-		std::cout << "You used your old sword... \nIt delt " << dmg << " damage!\n";
+		std::cout << "You used your wooden sword... \nIt delt " << dmg << " damage!\n";
 		std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
@@ -75,5 +73,5 @@ void OldSword::Use(Room& room, Player& plr)
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 	}
-	
+
 }

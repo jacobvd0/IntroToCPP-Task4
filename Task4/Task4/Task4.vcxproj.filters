@@ -36,6 +36,9 @@
     <ClCompile Include="OldSword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WoodenSword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OldSword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodenSword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,6 +9,7 @@
 
 Game::Game()
 {
+    m_player.pickup(OLD_SWORD);
 }
 
 Game::~Game()
@@ -74,11 +75,16 @@ void Game::drawMap()
 // Game update loop
 void Game::update()
 {
-    Point2D playerPos = m_player.GetPosition();
+    if (m_player.getHealth() != 0) {
+        Point2D playerPos = m_player.GetPosition();
 
-    m_map[playerPos.y][playerPos.x].drawDescription();
+        m_map[playerPos.y][playerPos.x].drawDescription();
 
-    getCommand();
+        getCommand();
+    }
+    else {
+        m_gameOver = true;
+    }
     
 }
 
@@ -94,6 +100,23 @@ void Game::getCommand()
     
     // Checks if the player wants to move
     if (input.Find("move") == 0) {
+        if (m_map[playerPos.y][playerPos.x].getType() == ENEMY) {
+
+            std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+            std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+            std::cout << "You can't leave this room yet!\n";
+
+            std::cout << "Press Enter to continue\n";
+            std::cin.clear();
+            std::cin.ignore(std::cin.rdbuf()->in_avail());
+            std::cout << HIDE_INPUT;
+            std::cin.get();
+            std::cout << RESET_COLOR;
+            std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+            std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+            return;
+        }
+
         // Down/South
         if (input.Find("down") != -1 || input.Find("south") != -1) {
             if (playerPos.y != STARTER_MAP_HEIGHT - 1)
@@ -118,23 +141,28 @@ void Game::getCommand()
 
     // Checks if the player wants to use an item
     else if (input.Find("use") == 0) {
-        // check what item here
-        //testSword.Use();
         Point2D playerPos = m_player.GetPosition();
 
         if (input.Find("old sword") != -1) {
-            m_player.useItem(OLD_SWORD, *m_map[playerPos.y, playerPos.x], m_player);
+            m_player.useItem(OLD_SWORD, m_map[playerPos.y][playerPos.x], m_player);
+        }
+        else if (input.Find("wooden sword") != -1) {
+            m_player.useItem(WOOD_SWORD, m_map[playerPos.y][playerPos.x], m_player);
         }
     }
 
     // Checks if the player wants to inspect an item
-    else if (input.Find("inspect") == 0 && input[0] == 'i') {
-        // check what item here
-        testSword.Inspect();
+    else if (input.Find("inspect") == 0) {
+        if (input.Find("old sword") != -1) {
+            m_player.inspectItem(OLD_SWORD);
+        }
+        else if (input.Find("wooden sword") != -1) {
+            m_player.inspectItem(WOOD_SWORD);
+        }
     }
 
     else if (input == "give sword") {
-        m_player.pickup(OLD_SWORD);
+        m_player.pickup(WOOD_SWORD);
     }
 
 
