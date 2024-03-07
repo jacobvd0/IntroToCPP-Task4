@@ -3,6 +3,9 @@
 #include <iostream>
 #include "OldSword.h"
 #include "WoodenSword.h"
+#include "Fireball.h"
+#include "Heal.h"
+#include "Freeze.h"
 
 Player::Player()
 {
@@ -117,6 +120,14 @@ int Player::getMaxHealth()
 	return m_maxhealth;
 }
 
+void Player::addHealth(int health)
+{
+	m_health += health;
+	if (m_health > m_maxhealth) {
+		m_health = m_maxhealth;
+	}
+}
+
 void Player::dealDamage(int dmg)
 {
 	m_health -= dmg;
@@ -143,4 +154,48 @@ void Player::addMana(int mana)
 	if (m_mana > m_maxMana) {
 		m_mana = m_maxMana;
 	}
+}
+
+void Player::castSpell(String& spell, Room& room, Player& plr)
+{
+	int spellbookLength = 3;
+
+	spellbookLength--;
+
+	if (m_spellbook[spellbookLength / 2] > spell) {
+		// search up
+		for (int i = spellbookLength / 2; i <= spellbookLength; i++) {
+			if (m_spellbook[i].EqualTo(spell)) {
+				executeSpell(spell, room, plr);
+			}
+		}
+	}
+	else if (m_spellbook[spellbookLength / 2].EqualTo(spell)) {
+		executeSpell(spell, room, plr);
+	}
+	else {
+		// search down
+		for (int i = spellbookLength / 2; i >= 0; i--) {
+			if (m_spellbook[i].EqualTo(spell)) {
+				executeSpell(spell, room, plr);
+			}
+		}
+	}
+}
+
+void Player::executeSpell(String& spell, Room& room, Player& plr)
+{
+	if (spell.EqualTo("fireball")) {
+		Fireball spell;
+		spell.Cast(room, plr);
+	}
+	else if (spell.EqualTo("heal")) {
+		Heal spell;
+		spell.Cast(room, plr);
+	}
+	else if (spell.EqualTo("freeze")) {
+		Freeze spell;
+		spell.Cast(room, plr);
+	}
+
 }

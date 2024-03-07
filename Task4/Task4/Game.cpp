@@ -161,6 +161,23 @@ void Game::getCommand()
         }
     }
 
+    else if (input.Find("cast") == 0) {
+        if (input.Find("fireball") != -1) {
+            String spell = "fireball";
+            m_player.castSpell(spell, m_map[playerPos.y][playerPos.x], m_player);
+        }
+        else if (input.Find("heal") != -1) {
+            String spell = "heal";
+            m_player.castSpell(spell, m_map[playerPos.y][playerPos.x], m_player);
+        }
+        else if (input.Find("freeze") != -1) {
+            String spell = "freeze";
+            m_player.castSpell(spell, m_map[playerPos.y][playerPos.x], m_player);
+        }
+
+    }
+
+
     else if (input == "give sword") {
         m_player.pickup(WOOD_SWORD);
     }

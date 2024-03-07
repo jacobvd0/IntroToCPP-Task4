@@ -21,11 +21,14 @@ public:
 
 	int getHealth();
 	int getMaxHealth();
+	void addHealth(int health);
 	void dealDamage(int dmg);
 
 	int getMana();
 	void takeMana(int mana);
 	void addMana(int mana);
+
+	void castSpell(String& spell, Room& room, Player& plr);
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];
@@ -34,6 +37,8 @@ private:
 	String m_spellbook[3] = {"fireball", "freeze", "heal"};
 	int m_mana = 100;
 	int m_maxMana = 200;
+
+	void executeSpell(String& spell, Room& room, Player& plr);
 
 	//OldSword m_oldsword; // this is the only item stored here since it has a durability
 };

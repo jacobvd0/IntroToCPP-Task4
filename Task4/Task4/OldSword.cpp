@@ -49,6 +49,7 @@ void OldSword::Use(Room& room, Player& plr)
 			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 			std::cout << "The enemy died!\n";
 			std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
+			plr.addMana(15);
 
 			std::cout << "Press Enter to continue\n";
 			std::cin.clear();

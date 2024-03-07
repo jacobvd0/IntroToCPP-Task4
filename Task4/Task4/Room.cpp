@@ -118,7 +118,8 @@ void Room::attackPlayer(Player& plr)
 {
 	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
-	int dmg = 3;
+	srand(time(NULL));
+	int dmg = (rand() % 6) + 1;
 	plr.dealDamage(dmg);
 
 	std::cout << "You were attacked! \nYou took " << dmg << " damage!\n";
