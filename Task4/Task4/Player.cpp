@@ -123,3 +123,24 @@ void Player::dealDamage(int dmg)
 	if (m_health < 0)
 		m_health = 0;
 }
+
+int Player::getMana()
+{
+	return m_mana;
+}
+
+void Player::takeMana(int mana)
+{
+	m_mana -= mana;
+	if (m_mana < 0) {
+		m_mana = 0;
+	}
+}
+
+void Player::addMana(int mana)
+{
+	m_mana += mana;
+	if (m_mana > m_maxMana) {
+		m_mana = m_maxMana;
+	}
+}

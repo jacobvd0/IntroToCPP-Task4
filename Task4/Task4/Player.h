@@ -2,6 +2,7 @@
 #include "Point2D.h"
 //#include "OldSword.h"
 #include "Room.h"
+#include "String.h"
 
 class Player
 {
@@ -21,11 +22,18 @@ public:
 	int getHealth();
 	int getMaxHealth();
 	void dealDamage(int dmg);
+
+	int getMana();
+	void takeMana(int mana);
+	void addMana(int mana);
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];
 	int m_health = 100;
 	int m_maxhealth = 100;
+	String m_spellbook[3] = {"fireball", "freeze", "heal"};
+	int m_mana = 100;
+	int m_maxMana = 200;
 
 	//OldSword m_oldsword; // this is the only item stored here since it has a durability
 };

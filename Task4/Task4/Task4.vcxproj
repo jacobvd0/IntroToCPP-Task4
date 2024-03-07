@@ -127,16 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="OldSword.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Spell.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task4.cpp" />
     <ClCompile Include="WoodenSword.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fireball.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefines.h" />
     <ClInclude Include="Item.h" />
@@ -145,6 +148,7 @@
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Spell.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="WoodenSword.h" />
   </ItemGroup>
