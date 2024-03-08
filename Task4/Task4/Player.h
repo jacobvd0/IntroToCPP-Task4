@@ -15,6 +15,7 @@ public:
 	Point2D GetPosition();
 	void SetPosition(Point2D pos);
 	void draw();
+	void attack(Room& room, Player& plr);
 	void useItem(int item, Room& room, Player& plr);
 	void inspectItem(int item);
 	bool pickup(int item);

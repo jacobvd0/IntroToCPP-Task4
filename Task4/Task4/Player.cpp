@@ -60,6 +60,54 @@ void Player::draw()
 	std::cout << GREY << "[" << GREEN << PLAYER_ICON << GREY << "] " << RESET_COLOR;
 }
 
+// Standalone attack (uses no items)
+void Player::attack(Room& room, Player& plr)
+{
+	Tools ctools;
+
+	if (room.getType() == ENEMY) {
+		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+		room.dealDamage(2);
+
+		std::cout << "You punched the enemy... \nIt only did 2 damage!\n";
+		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
+
+		ctools.Pause();
+		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+
+		// Checks if the enemy is dead, if it isn't it'll attack the player
+		if (room.getEnemyHP() != 0) {
+			room.attackPlayer(plr);
+		}
+		else {
+			room.setType(EMPTY);
+			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+			std::cout << "The enemy died!\n";
+			plr.addMana(15);
+			plr.addScore(10);
+			plr.addEnemyKill();
+
+			ctools.Pause();
+			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+		}
+	}
+	else {
+		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+		std::cout << "There's nothing to attack...\n";
+
+		ctools.Pause();
+		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+	}
+}
+
 // Uses the provided item if the player owns it
 void Player::useItem(int item, Room& room, Player& plr)
 {
