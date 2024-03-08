@@ -151,36 +151,50 @@ void Room::pickup(Player& plr)
 	int maxItem = WOOD_SWORD;
 
 	if (m_type == ITEM) {
-		m_type = EMPTY;
 		srand(time(NULL));
 		minItem--;
 		int item = rand() % (maxItem - minItem + 1) + minItem;
 
 		if (item > minItem) {
-			plr.pickup(item);
+			if (plr.pickup(item)) {
+				m_type = EMPTY;
+				String itemName;
+				std::cout << item;
+				switch (item) {
+				case OLD_SWORD:
+					itemName = "Old Sword";
+					break;
+				case WOOD_SWORD:
+					itemName = "Wooden Sword";
+					break;
+				}
 
-			String itemName;
-			std::cout << item;
-			switch (item) {
-			case OLD_SWORD:
-				itemName = "Old Sword";
-				break;
-			case WOOD_SWORD:
-				itemName = "Wooden Sword";
-				break;
+
+				std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+				std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+				std::cout << "You picked up a " << itemName.CStr() << "!" << std::endl;
+
+				ctools.Pause();
+				std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+				std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+			}
+			else {
+				std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+				std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+				std::cout << "You don't have enough inventory space!" << std::endl;
+
+				ctools.Pause();
+				std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+				std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+
 			}
 
-
-			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
-			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
-
-			std::cout << "You picked up a " << itemName.CStr() << "!" << std::endl;
-
-			ctools.Pause();
-			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
-			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+			
 		}
 		else {
+			m_type = EMPTY;
 			int mana = (rand() % 10) + 5;
 			plr.addMana(mana);
 			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";

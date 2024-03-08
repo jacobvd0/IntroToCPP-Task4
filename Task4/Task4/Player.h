@@ -29,6 +29,10 @@ public:
 	void addMana(int mana);
 
 	void castSpell(String& spell, Room& room, Player& plr);
+
+	void addScore(int score);
+	int getScore();
+	void resetScore();
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];
@@ -39,6 +43,8 @@ private:
 	int m_maxMana = 200;
 
 	void executeSpell(String& spell, Room& room, Player& plr);
+
+	int m_score = 0;
 
 	//OldSword m_oldsword; // this is the only item stored here since it has a durability
 };

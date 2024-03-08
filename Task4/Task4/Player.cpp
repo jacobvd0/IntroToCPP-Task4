@@ -183,6 +183,21 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	}
 }
 
+void Player::addScore(int score)
+{
+	m_score += score;
+}
+
+int Player::getScore()
+{
+	return m_score;
+}
+
+void Player::resetScore()
+{
+	m_score = 0;
+}
+
 void Player::executeSpell(String& spell, Room& room, Player& plr)
 {
 	if (spell.EqualTo("fireball")) {
