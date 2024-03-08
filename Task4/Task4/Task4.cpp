@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameDefines.h"
 #include "Tools.h"
+#include <fstream>
 
 int main()
 {
@@ -29,8 +30,8 @@ int main()
     std::cout << WHITE << "You killed " << game.getEnemyKills() << " enemies (+" << game.getEnemyKills() * 10 << ")" << std::endl;
     std::cout << WHITE << "You completed " << game.getLevelScore() << " levels (+" << game.getLevelScore() * 7 << ")\n";
 
-   std::cout << WHITE << "Your total score is " << game.getPlayerScore() << "." << std::endl;
-
+    std::cout << WHITE << "Your total score is " << game.getPlayerScore() << "." << std::endl;
+    
 
     ctools.Pause();
 
