@@ -183,6 +183,15 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	}
 }
 
+int Player::getEnemyKills()
+{
+	return m_enemyKills;
+}
+
+void Player::addEnemyKill()
+{
+}
+
 void Player::addScore(int score)
 {
 	m_score += score;

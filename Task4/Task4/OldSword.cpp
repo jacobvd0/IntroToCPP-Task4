@@ -45,6 +45,8 @@ void OldSword::Use(Room& room, Player& plr)
 			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 			std::cout << "The enemy died!\n";
 			plr.addMana(15);
+			plr.addScore(10);
+			plr.addEnemyKill();
 
 			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";

@@ -30,6 +30,8 @@ public:
 
 	void castSpell(String& spell, Room& room, Player& plr);
 
+	int getEnemyKills();
+	void addEnemyKill();
 	void addScore(int score);
 	int getScore();
 	void resetScore();
@@ -45,6 +47,7 @@ private:
 	void executeSpell(String& spell, Room& room, Player& plr);
 
 	int m_score = 0;
+	int m_enemyKills;
 
 	//OldSword m_oldsword; // this is the only item stored here since it has a durability
 };

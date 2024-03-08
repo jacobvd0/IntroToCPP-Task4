@@ -95,6 +95,30 @@ void Game::update()
     
 }
 
+int Game::getPlayerScore()
+{
+    return m_player.getScore();
+}
+
+int Game::getLevelScore()
+{
+    return m_completedLevels;
+}
+
+int Game::getEnemyKills()
+{
+    return m_player.getEnemyKills();
+}
+
+void Game::newLevel()
+{
+    m_completedLevels++;
+    m_player.addScore(7);
+    m_player.SetPosition(Point2D{0,0});
+    initializeMap();
+
+}
+
 // Gets input from the player
 void Game::getCommand()
 {
@@ -184,7 +208,31 @@ void Game::getCommand()
         m_map[playerPos.y][playerPos.x].pickup(m_player);
     }
 
+    else if (input == "enter") {
+        if (m_map[playerPos.y][playerPos.x].getType() == EXIT) {
+            m_player.addScore(10);
+            newLevel();
+        }
+        else if (m_map[playerPos.y][playerPos.x].getType() == ENTER) {
+            std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+            std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+            std::cout << "The exit is blocked off...\n";
 
+            ctools.Pause();
+        }
+        else {
+            std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+            std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+            std::cout << "There's no exit here...\n";
+
+            ctools.Pause();
+
+        }
+    }
+
+    else if (input == "die") {
+        m_player.dealDamage(10000);
+    }
 
 
 

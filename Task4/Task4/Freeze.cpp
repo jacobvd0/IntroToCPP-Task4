@@ -66,6 +66,8 @@ void Freeze::Cast(Room& room, Player& plr)
 				std::cout << "The enemy died!\n";
 				std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 				plr.addMana(15);
+				plr.addScore(10);
+				plr.addEnemyKill();
 
 				ctools.Pause();
 				std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";

@@ -43,6 +43,9 @@ void WoodenSword::Use(Room& room, Player& plr)
 			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 			std::cout << "The enemy died!\n";
 			std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
+			plr.addScore(10);
+			plr.addMana(15);
+			plr.addEnemyKill();
 
 			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
