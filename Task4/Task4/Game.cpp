@@ -10,6 +10,7 @@
 
 Game::Game()
 {
+    // Gives the player a old sword to start off with
     m_player.pickup(OLD_SWORD);
 }
 
@@ -69,6 +70,7 @@ void Game::initializeMap()
     m_map[0][0].drawDescription();
 }
 
+// Draws the player's HP and Mana
 void Game::drawInfo()
 {
     std::cout << CSI << MAX_MAP_HEIGHT + 1 << ";" << 1 << "H";
@@ -95,21 +97,25 @@ void Game::update()
     
 }
 
+// Returns the player's current score
 int Game::getPlayerScore()
 {
     return m_player.getScore();
 }
 
+// Gets the amount of levels completed
 int Game::getLevelScore()
 {
     return m_completedLevels;
 }
 
+// Gets the amount of enemies killed by the player
 int Game::getEnemyKills()
 {
     return m_player.getEnemyKills();
 }
 
+// Creates a new level
 void Game::newLevel()
 {
     m_completedLevels++;
@@ -125,9 +131,11 @@ void Game::getCommand()
     Tools ctools;
     Point2D playerPos = m_player.GetPosition();
 
-    std::cout << "What do you want to do?\n";
-    std::cout << "Use " << YELLOW << "HELP" << RESET_COLOR << " to view all available commands." << RESET_COLOR << std::endl;
+    std::cout << "What do you want to do? Use" << YELLOW << " HELP " << RESET_COLOR << "to view all commands.\n";
+    
     std::cout << YELLOW;
+    std::cin.clear();
+    std::cin.ignore(std::cin.rdbuf()->in_avail());
     String input = input.ReadFromConsole().ToLower();
     std::cout << RESET_COLOR;
     
@@ -167,6 +175,24 @@ void Game::getCommand()
         }
     }
 
+    // WASD inputs
+    else if (input == "w") {
+        if (playerPos.y != 0)
+            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y - 1 });
+    }
+    else if (input == "a") {
+        if (playerPos.x != 0)
+            m_player.SetPosition(Point2D{ playerPos.x - 1, playerPos.y });
+    }
+    else if (input == "s") {
+        if (playerPos.y != STARTER_MAP_HEIGHT - 1)
+            m_player.SetPosition(Point2D{ playerPos.x, playerPos.y + 1 });
+    }
+    else if (input == "d") {
+        if (playerPos.x != STARTER_MAP_WIDTH - 1)
+            m_player.SetPosition(Point2D{ playerPos.x + 1, playerPos.y });
+    }
+
     // Checks if the player wants to use an item
     else if (input.Find("use") == 0) {
         Point2D playerPos = m_player.GetPosition();
@@ -176,6 +202,9 @@ void Game::getCommand()
         }
         else if (input.Find("wooden sword") != -1) {
             m_player.useItem(WOOD_SWORD, m_map[playerPos.y][playerPos.x], m_player);
+        }
+        else if (input.Find("health potion") != -1) {
+            m_player.useItem(HEALTH_POTION, m_map[playerPos.y][playerPos.x], m_player);
         }
     }
 
@@ -187,8 +216,12 @@ void Game::getCommand()
         else if (input.Find("wooden sword") != -1) {
             m_player.inspectItem(WOOD_SWORD);
         }
+        else if (input.Find("health potion") != -1) {
+            m_player.inspectItem(HEALTH_POTION);
+        }
     }
 
+    // Spell casting
     else if (input.Find("cast") == 0) {
         if (input.Find("fireball") != -1) {
             String spell = "fireball";
@@ -205,10 +238,12 @@ void Game::getCommand()
 
     }
 
+    // Picks up the item in the current room
     else if (input == "pickup") {
         m_map[playerPos.y][playerPos.x].pickup(m_player);
     }
 
+    // Enters the exit to go to the new level
     else if (input == "enter") {
         if (m_map[playerPos.y][playerPos.x].getType() == EXIT) {
             m_player.addScore(10);
@@ -231,14 +266,18 @@ void Game::getCommand()
         }
     }
 
+    // Lists all the items in the player's inventory
     else if (input == "items") {
         m_player.listItems();
     }
+    
+    // Lists all the spells in the player's spellbook
     else if (input == "spells") {
         m_player.listSpells();
     }
 
 
+    // Shows all the commands the user can do
     else if (input == "help") {
         std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
         std::cout << CSI << "4M" << CSI << "4L" << std::endl;
@@ -254,14 +293,7 @@ void Game::getCommand()
         std::cout << CSI << "8M" << CSI << "8L" << std::endl;
     }
 
-
-
-
-    else if (input == "/minecraft") {
-        // Riley's fault this exists
-        ShellExecute(0, 0, L"https://minecraft.net/download", 0, 0, SW_SHOW);
-    }
-
+    // redraws the player and previous room in case the player was moved
     m_map[playerPos.y][playerPos.x].draw();
     m_player.draw();
 }

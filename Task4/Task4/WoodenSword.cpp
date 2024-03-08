@@ -14,11 +14,13 @@ WoodenSword::~WoodenSword()
 {
 }
 
+// Uses the Wooden Sword
 void WoodenSword::Use(Room& room, Player& plr)
 {
 	Tools ctools;
 	int roomType = room.getType();
 
+	// Makes sure the player is in an enemy room
 	if (roomType == ENEMY) {
 		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
@@ -34,6 +36,8 @@ void WoodenSword::Use(Room& room, Player& plr)
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
+		// Makes sure the enemy is still alive
+		// If it is, attack the player
 		if (room.getEnemyHP() != 0) {
 			room.attackPlayer(plr);
 		}

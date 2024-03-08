@@ -8,19 +8,19 @@ OldSword::OldSword()
 {
 	SetDescription(m_itemDescription);
 	SetName(m_itemName);
-
-	//m_usesLeft = 30;
 }
 
 OldSword::~OldSword()
 {
 }
 
+// Uses the Old Sword
 void OldSword::Use(Room& room, Player& plr)
 {
 	Tools ctools;
 	int roomType = room.getType();
 	
+	// Checks if the room type is an enemy room
 	if (roomType == ENEMY) {
 		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
@@ -36,6 +36,8 @@ void OldSword::Use(Room& room, Player& plr)
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
+		// Makes sure the enemy is still alive
+		// If it is, attack the player
 		if (room.getEnemyHP() != 0) {
 			room.attackPlayer(plr);
 		}

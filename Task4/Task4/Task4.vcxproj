@@ -131,6 +131,7 @@
     <ClCompile Include="Freeze.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Heal.cpp" />
+    <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="OldSword.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefines.h" />
     <ClInclude Include="Heal.h" />
+    <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="OldSword.h" />
     <ClInclude Include="Player.h" />

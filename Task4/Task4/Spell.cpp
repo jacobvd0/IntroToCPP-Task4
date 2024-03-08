@@ -12,6 +12,7 @@ Spell::~Spell()
 {
 }
 
+// Placeholder for spells, if a spell doesn't have a function this one will be called instead
 void Spell::Cast(Room& room, Player& plr)
 {
     Tools ctools;
@@ -22,11 +23,13 @@ void Spell::Cast(Room& room, Player& plr)
     ctools.Pause();
 }
 
+// Returns the spell name
 String Spell::GetName()
 {
     return m_spellName;
 }
 
+// Sets the spell name
 void Spell::SetName(String str)
 {
     m_spellName = str;

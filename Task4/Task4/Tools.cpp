@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameDefines.h"
 
+// Pauses the game
 void Tools::Pause()
 {
 	std::cout << "Press Enter to continue\n";

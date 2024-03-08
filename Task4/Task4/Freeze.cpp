@@ -13,12 +13,15 @@ Freeze::~Freeze()
 {
 }
 
+// Casts the Freeze spell
 void Freeze::Cast(Room& room, Player& plr)
 {
 	Tools ctools;
 	int roomType = room.getType();
 
+	// Makes sure the player has enough Mana
 	if (plr.getMana() >= m_cost) {
+		// Makes sure the player is in an enemy room
 		if (roomType == ENEMY) {
 			plr.takeMana(m_cost);
 			// makes a random number between 1 and 10
@@ -41,6 +44,8 @@ void Freeze::Cast(Room& room, Player& plr)
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
+			// Makes sure the enemy is still alive
+			// If it is, attack the player
 			if (room.getEnemyHP() != 0) {
 				if (randomNum == 2) {
 					std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";

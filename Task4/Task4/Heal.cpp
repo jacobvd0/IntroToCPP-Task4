@@ -13,11 +13,13 @@ Heal::~Heal()
 {
 }
 
+// Casts the heal spell
 void Heal::Cast(Room& room, Player& plr)
 {
 	Tools ctools;
 	int roomType = room.getType();
 
+	// Makes sure the player has enough Mana
 	if (plr.getMana() >= m_cost) {
 		plr.takeMana(m_cost);
 		plr.addHealth(15);
@@ -34,7 +36,7 @@ void Heal::Cast(Room& room, Player& plr)
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
 
-
+		// Checks if the player is in an enemy room
 		if (roomType == ENEMY) {
 			if (room.getEnemyHP() != 0) {
 				room.attackPlayer(plr);

@@ -14,12 +14,15 @@ Fireball::~Fireball()
 {
 }
 
+// Casts the Fireball spell
 void Fireball::Cast(Room& room, Player& plr)
 {
 	Tools ctools;
 	int roomType = room.getType();
 
+	// Checks if the player has enough Mana
 	if (plr.getMana() >= m_cost) {
+		// Checks if the player is in an enemy room
 		if (roomType == ENEMY) {
 			plr.takeMana(m_cost);
 			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
@@ -36,6 +39,8 @@ void Fireball::Cast(Room& room, Player& plr)
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
+			// Makes sure the enemy is still alive
+			// If it is, attack the player
 			if (room.getEnemyHP() != 0) {
 				room.attackPlayer(plr);
 			}

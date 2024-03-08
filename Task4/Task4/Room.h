@@ -18,7 +18,6 @@ public:
 	void drawDescription();
 
 	void setPosition(Point2D pos);
-	void executeCommand();
 
 	void dealDamage(int dmg);
 	void attackPlayer(Player& plr);

@@ -44,6 +44,7 @@ void Room::draw()
 {
 	std::cout << CSI << m_location.y + 1 << ";" << m_location.x * 4 + 2 << "H";
 
+	// Checks the type of room
 	switch (m_type) {
 	case EMPTY:
 		std::cout << GREY << "[" << RESET_COLOR << EMPTY_ICON << GREY << "] " << RESET_COLOR;
@@ -71,8 +72,8 @@ void Room::drawDescription()
 {
 	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
-	//std::cout << CSI << MAX_MAP_HEIGHT + 3 << ";" << 1 << "H";
 
+	// Checks the type of room
 	switch (m_type) {
 	case EMPTY:
 		std::cout << "It's an empty room, nothing to see here.\n";
@@ -101,10 +102,7 @@ void Room::setPosition(Point2D pos)
 	m_location = pos;
 }
 
-void Room::executeCommand()
-{
-}
-
+// Deals damage to the enemy
 void Room::dealDamage(int dmg)
 {
 	m_enemyHP -= dmg;
@@ -115,6 +113,7 @@ void Room::dealDamage(int dmg)
 		m_type = EMPTY;
 }
 
+// Makes the enemy attack the player with a random damage between 1-6
 void Room::attackPlayer(Player& plr)
 {
 	Tools ctools;
@@ -127,34 +126,38 @@ void Room::attackPlayer(Player& plr)
 	std::cout << "You were attacked! \nYou took " << dmg << " damage!\n";
 	std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 	std::cout << "Enemy HP: " << getEnemyHP() << "/" << getEnemyMaxHP() << std::endl;
-	//m_usesLeft--;
 
 	ctools.Pause();
 	std::cout << CSI << MAX_MAP_HEIGHT + 7 << ";" << 1 << "H";
 	std::cout << CSI << "7M" << CSI << "7L" << std::endl;
 }
 
+// Gets the enemy's current HP
 int Room::getEnemyHP()
 {
 	return m_enemyHP;
 }
 
+// Gets the enemy's max HP
 int Room::getEnemyMaxHP()
 {
 	return m_maxHP;
 }
 
+// Handles item pickups
 void Room::pickup(Player& plr)
 {
 	Tools ctools;
 	int minItem = OLD_SWORD;
-	int maxItem = WOOD_SWORD;
+	int maxItem = HEALTH_POTION;
 
+	// Makes sure the room is an item room
 	if (m_type == ITEM) {
 		srand(time(NULL));
 		minItem--;
 		int item = rand() % (maxItem - minItem + 1) + minItem;
 
+		// Checks if it's an item or mana
 		if (item > minItem) {
 			if (plr.pickup(item)) {
 				m_type = EMPTY;
@@ -165,6 +168,9 @@ void Room::pickup(Player& plr)
 					break;
 				case WOOD_SWORD:
 					itemName = "Wooden Sword";
+					break;
+				case HEALTH_POTION:
+					itemName = "Health Potion";
 					break;
 				}
 

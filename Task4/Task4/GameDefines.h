@@ -46,6 +46,7 @@ const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
 const int AIR = 5; // if there's no item
 const int OLD_SWORD = 20;
 const int WOOD_SWORD = 21;
+const int HEALTH_POTION = 22;
 
 
 

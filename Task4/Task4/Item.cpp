@@ -12,6 +12,7 @@ Item::~Item()
 {
 }
 
+// Placeholder use in case it isn't added to the item's class
 void Item::Use(Room& room, Player& plr)
 {
     Tools ctools;
@@ -22,6 +23,7 @@ void Item::Use(Room& room, Player& plr)
     ctools.Pause();
 }
 
+// Shows information about the item using the item name and description variables
 void Item::Inspect()
 {
     Tools ctools;
@@ -37,21 +39,25 @@ void Item::Inspect()
     std::cout << CSI << "6M" << CSI << "6L" << std::endl;
 }
 
+// Returns the item description
 String Item::GetDescription()
 {
     return m_itemDescription;
 }
 
+// Sets the item description
 void Item::SetDescription(String str)
 {
     m_itemDescription = str;
 }
 
+// Returns the item name
 String Item::GetName()
 {
     return m_itemName;
 }
 
+// Sets the item name
 void Item::SetName(String str)
 {
     m_itemName = str;

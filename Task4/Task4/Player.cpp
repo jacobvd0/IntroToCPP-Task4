@@ -7,6 +7,7 @@
 #include "Heal.h"
 #include "Freeze.h"
 #include "Tools.h"
+#include "HealthPotion.h"
 
 Player::Player()
 {
@@ -14,6 +15,7 @@ Player::Player()
 	for (int i = 0; i < 5; i++) {
 		m_inventory[i] = EMPTY;
 	}
+	m_enemyKills = 0;
 }
 
 Player::Player(Point2D pos)
@@ -22,6 +24,7 @@ Player::Player(Point2D pos)
 	for (int i = 0; i < 5; i++) {
 		m_inventory[i] = EMPTY;
 	}
+	m_enemyKills = 0;
 }
 
 Player::Player(int x, int y)
@@ -30,6 +33,7 @@ Player::Player(int x, int y)
 	for (int i = 0; i < 5; i++) {
 		m_inventory[i] = EMPTY;
 	}
+	m_enemyKills = 0;
 }
 
 Player::~Player()
@@ -54,17 +58,18 @@ void Player::draw()
 	std::cout << CSI << m_playerPos.y + 1 << ";" << m_playerPos.x * 4 + 2 << "H";
 
 	std::cout << GREY << "[" << GREEN << PLAYER_ICON << GREY << "] " << RESET_COLOR;
-	//std::cout << "Drawn to " << m_playerPos.y + 1 << " " << m_playerPos.x * 4 + 2;
 }
 
+// Uses the provided item if the player owns it
 void Player::useItem(int item, Room& room, Player& plr)
 {
 	for (int i = 0; i < 5; i++) {
+
+		// confirms that the player has the item in their inv
 		if (m_inventory[i] == item) {
 			OldSword oldSword;
 			WoodenSword woodSword;
-			// confirmed that the player has the item in their inv
-			// run the use function here
+			HealthPotion healthPotion;
 
 			switch (item) {
 			case OLD_SWORD:
@@ -73,19 +78,24 @@ void Player::useItem(int item, Room& room, Player& plr)
 			case WOOD_SWORD:
 				woodSword.Use(room, plr);
 				break;
+			case HEALTH_POTION:
+				healthPotion.Use(room, plr);
+				break;
 			}
 		}
 	}
 }
 
+// Shows information about the item
 void Player::inspectItem(int item)
 {
 	for (int i = 0; i < 5; i++) {
+
+		// confirms that the player has the item in their inv
 		if (m_inventory[i] == item) {
 			OldSword oldSword;
 			WoodenSword woodSword;
-			// confirmed that the player has the item in their inv
-			// run the use function here
+			HealthPotion healthPotion;
 
 			switch (item) {
 			case OLD_SWORD:
@@ -94,12 +104,17 @@ void Player::inspectItem(int item)
 			case WOOD_SWORD:
 				woodSword.Inspect();
 				break;
+			case HEALTH_POTION:
+				healthPotion.Inspect();
+				break;
+
 			}
 
 		}
 	}
 }
 
+// Picks up a random item
 bool Player::pickup(int item)
 {
 	for (int i = 0; i < 5; i++) {
@@ -111,16 +126,29 @@ bool Player::pickup(int item)
 	return false;
 }
 
+// Removes an item from the player's inventory
+void Player::removeItem(int item)
+{
+	for (int i = 0; i < 5; i++) {
+		if (m_inventory[i] == item) {
+			m_inventory[i] = AIR;
+		}
+	}
+}
+
+// Returns the player's health
 int Player::getHealth()
 {
 	return m_health;
 }
 
+// Returns the player's max health
 int Player::getMaxHealth()
 {
 	return m_maxhealth;
 }
 
+// Adds health to the player
 void Player::addHealth(int health)
 {
 	m_health += health;
@@ -129,6 +157,7 @@ void Player::addHealth(int health)
 	}
 }
 
+// Deals damage to the player
 void Player::dealDamage(int dmg)
 {
 	m_health -= dmg;
@@ -136,11 +165,13 @@ void Player::dealDamage(int dmg)
 		m_health = 0;
 }
 
+// Returns the player's current mana
 int Player::getMana()
 {
 	return m_mana;
 }
 
+// Removed mana from the player
 void Player::takeMana(int mana)
 {
 	m_mana -= mana;
@@ -149,6 +180,7 @@ void Player::takeMana(int mana)
 	}
 }
 
+// Gives mana to the player
 void Player::addMana(int mana)
 {
 	m_mana += mana;
@@ -157,12 +189,16 @@ void Player::addMana(int mana)
 	}
 }
 
+// Casts a spell from the spellbook
 void Player::castSpell(String& spell, Room& room, Player& plr)
 {
+	// Length of the spellbook
 	int spellbookLength = 3;
 
+	// Remove 1 due to arrays starting at 0
 	spellbookLength--;
 
+	// Binary search to check if the player owns that spell
 	if (m_spellbook[spellbookLength / 2] > spell) {
 		// search up
 		for (int i = spellbookLength / 2; i <= spellbookLength; i++) {
@@ -184,30 +220,37 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	}
 }
 
+// Returns the number of enemies the player has killed
 int Player::getEnemyKills()
 {
 	return m_enemyKills;
 }
 
+// Adds a kill to the enemy kill counter
 void Player::addEnemyKill()
 {
+	m_enemyKills++;
 }
 
+// Adds score to the player
 void Player::addScore(int score)
 {
 	m_score += score;
 }
 
+// Returns the player's score
 int Player::getScore()
 {
 	return m_score;
 }
 
+// Resets the score to 0
 void Player::resetScore()
 {
 	m_score = 0;
 }
 
+// List all the items in the player's inventory
 void Player::listItems()
 {
 	Tools ctools;
@@ -216,6 +259,7 @@ void Player::listItems()
 	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 	std::cout << CYAN << "Inventory:\n";
 
+	// Loops through all items in the m_items array and prints them if the item isn't empty (AIR)
 	for (int i = 0; i < 5; i++) {
 		switch (m_inventory[i]) {
 		case OLD_SWORD:
@@ -231,6 +275,7 @@ void Player::listItems()
 	std::cout << CSI << "8M" << CSI << "8L" << std::endl;
 }
 
+// Executes a spell
 void Player::executeSpell(String& spell, Room& room, Player& plr)
 {
 	if (spell.EqualTo("fireball")) {
@@ -248,6 +293,7 @@ void Player::executeSpell(String& spell, Room& room, Player& plr)
 
 }
 
+// Lists all the spells in the player's spellbook
 void Player::listSpells()
 {
 	Tools ctools;

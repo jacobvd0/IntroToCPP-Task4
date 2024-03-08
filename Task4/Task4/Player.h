@@ -18,6 +18,7 @@ public:
 	void useItem(int item, Room& room, Player& plr);
 	void inspectItem(int item);
 	bool pickup(int item);
+	void removeItem(int item);
 
 	int getHealth();
 	int getMaxHealth();
