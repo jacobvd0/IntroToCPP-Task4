@@ -33,9 +33,6 @@ const char ITEM_DROPPED_ICON = '$';
 
 const int MAX_RANDOM_TYPE = 3;
 
-// Items
-const int AIR = 5; // if there's no item
-
 // Room Descriptions
 const String EMPTY_DESC = "It's an empty room, nothing to see here";
 const String ENEMY_DESC = "WATCH OUT! An enemy is nearby.";
@@ -46,6 +43,7 @@ const String ENTER_DESC = "You came in this way, it seems to be blocked off.";
 
 
 // Items
+const int AIR = 5; // if there's no item
 const int OLD_SWORD = 20;
 const int WOOD_SWORD = 21;
 
@@ -61,3 +59,4 @@ const char* const GREY = "\x1b[38;5;8m";
 const char* const LIGHT_GREY = "\x1b[38;5;248m";
 const char* const GREEN = "\x1b[38;5;2m";
 const char* const WHITE = "\x1b[38;5;15m";
+const char* const CYAN = "\x1b[38;5;38m";

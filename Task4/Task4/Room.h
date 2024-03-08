@@ -25,8 +25,8 @@ public:
 
 	int getEnemyHP();
 	int getEnemyMaxHP();
+	void pickup(Player& plr);
 private:
-	void pickup();
 
 	Point2D m_location;
 	int m_item;

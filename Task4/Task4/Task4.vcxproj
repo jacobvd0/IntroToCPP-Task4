@@ -138,6 +138,7 @@
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task4.cpp" />
+    <ClCompile Include="Tools.cpp" />
     <ClCompile Include="WoodenSword.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="Room.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Tools.h" />
     <ClInclude Include="WoodenSword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

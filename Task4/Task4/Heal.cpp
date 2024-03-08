@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameDefines.h"
 #include "Player.h"
+#include "Tools.h"
 
 Heal::Heal()
 {
@@ -14,6 +15,7 @@ Heal::~Heal()
 
 void Heal::Cast(Room& room, Player& plr)
 {
+	Tools ctools;
 	int roomType = room.getType();
 
 	if (plr.getMana() >= m_cost) {
@@ -23,17 +25,11 @@ void Heal::Cast(Room& room, Player& plr)
 		std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 		std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 		std::cout << "You cast Heal... \nYou gained 15 HP!\n";
-		std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 		if (roomType == ENEMY)
 			std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
@@ -51,12 +47,7 @@ void Heal::Cast(Room& room, Player& plr)
 
 		std::cout << "You don't have enough mana...\n";
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 	}

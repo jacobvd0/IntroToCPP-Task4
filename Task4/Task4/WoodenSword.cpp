@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameDefines.h"
 #include "Player.h"
+#include "Tools.h"
 
 WoodenSword::WoodenSword()
 {
@@ -15,6 +16,7 @@ WoodenSword::~WoodenSword()
 
 void WoodenSword::Use(Room& room, Player& plr)
 {
+	Tools ctools;
 	int roomType = room.getType();
 
 	if (roomType == ENEMY) {
@@ -25,16 +27,10 @@ void WoodenSword::Use(Room& room, Player& plr)
 
 		room.dealDamage(dmg);
 		std::cout << "You used your wooden sword... \nIt delt " << dmg << " damage!\n";
-		std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
@@ -48,12 +44,7 @@ void WoodenSword::Use(Room& room, Player& plr)
 			std::cout << "The enemy died!\n";
 			std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 
-			std::cout << "Press Enter to continue\n";
-			std::cin.clear();
-			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << HIDE_INPUT;
-			std::cin.get();
-			std::cout << RESET_COLOR;
+			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 		}
@@ -64,12 +55,7 @@ void WoodenSword::Use(Room& room, Player& plr)
 
 		std::cout << "There's nothing to attack...\n";
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 	}

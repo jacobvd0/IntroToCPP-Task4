@@ -2,6 +2,7 @@
 #include "GameDefines.h"
 #include <iostream>
 #include "Player.h"
+#include "Tools.h"
 
 Room::Room()
 {
@@ -116,6 +117,7 @@ void Room::dealDamage(int dmg)
 
 void Room::attackPlayer(Player& plr)
 {
+	Tools ctools;
 	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 	srand(time(NULL));
@@ -127,12 +129,7 @@ void Room::attackPlayer(Player& plr)
 	std::cout << "Enemy HP: " << getEnemyHP() << "/" << getEnemyMaxHP() << std::endl;
 	//m_usesLeft--;
 
-	std::cout << "Press Enter to continue\n";
-	std::cin.clear();
-	std::cin.ignore(std::cin.rdbuf()->in_avail());
-	std::cout << HIDE_INPUT;
-	std::cin.get();
-	std::cout << RESET_COLOR;
+	ctools.Pause();
 	std::cout << CSI << MAX_MAP_HEIGHT + 7 << ";" << 1 << "H";
 	std::cout << CSI << "7M" << CSI << "7L" << std::endl;
 }
@@ -147,6 +144,55 @@ int Room::getEnemyMaxHP()
 	return m_maxHP;
 }
 
-void Room::pickup()
+void Room::pickup(Player& plr)
 {
+	Tools ctools;
+	int minItem = OLD_SWORD;
+	int maxItem = WOOD_SWORD;
+
+	if (m_type == ITEM) {
+		m_type = EMPTY;
+		srand(time(NULL));
+		minItem--;
+		int item = rand() % (maxItem - minItem + 1) + minItem;
+
+		if (item > minItem) {
+			plr.pickup(item);
+
+			String itemName;
+			std::cout << item;
+			switch (item) {
+			case OLD_SWORD:
+				itemName = "Old Sword";
+				break;
+			case WOOD_SWORD:
+				itemName = "Wooden Sword";
+				break;
+			}
+
+
+			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+			std::cout << "You picked up a " << itemName.CStr() << "!" << std::endl;
+
+			ctools.Pause();
+			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+		}
+		else {
+			int mana = (rand() % 10) + 5;
+			plr.addMana(mana);
+			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+
+			std::cout << "You gained " << mana << " mana! \nYou now have " << plr.getMana() << " mana." << std::endl;
+
+			ctools.Pause();
+			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
+			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
+		}
+		
+		
+	}
 }

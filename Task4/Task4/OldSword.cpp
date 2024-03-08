@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameDefines.h"
 #include "Player.h"
+#include "Tools.h"
 
 OldSword::OldSword()
 {
@@ -17,6 +18,7 @@ OldSword::~OldSword()
 
 void OldSword::Use(Room& room, Player& plr)
 {
+	Tools ctools;
 	int roomType = room.getType();
 	
 	if (roomType == ENEMY) {
@@ -27,16 +29,10 @@ void OldSword::Use(Room& room, Player& plr)
 
 		room.dealDamage(dmg);
 		std::cout << "You used your old sword... \nIt delt " << dmg << " damage!\n";
-		std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
@@ -48,15 +44,9 @@ void OldSword::Use(Room& room, Player& plr)
 			std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
 			std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 			std::cout << "The enemy died!\n";
-			std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 			plr.addMana(15);
 
-			std::cout << "Press Enter to continue\n";
-			std::cin.clear();
-			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << HIDE_INPUT;
-			std::cin.get();
-			std::cout << RESET_COLOR;
+			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 		}
@@ -67,12 +57,7 @@ void OldSword::Use(Room& room, Player& plr)
 
 		std::cout << "There's nothing to attack...\n";
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 	}

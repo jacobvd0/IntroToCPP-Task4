@@ -1,6 +1,7 @@
 #include "Spell.h"
 #include <iostream>
 #include "GameDefines.h"
+#include "Tools.h"
 
 Spell::Spell()
 {
@@ -13,16 +14,12 @@ Spell::~Spell()
 
 void Spell::Cast(Room& room, Player& plr)
 {
+    Tools ctools;
     std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
     std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 
     std::cout << "It doesn't seem to do much.\n";
-    std::cout << "Press Enter to continue\n";
-    std::cin.clear();
-    std::cin.ignore(std::cin.rdbuf()->in_avail());
-    std::cout << HIDE_INPUT;
-    std::cin.get();
-    std::cout << RESET_COLOR;
+    ctools.Pause();
 }
 
 String Spell::GetName()

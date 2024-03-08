@@ -6,6 +6,7 @@
 #include "OldSword.h"
 #include <windows.h>
 #include <shellapi.h>
+#include "Tools.h"
 
 Game::Game()
 {
@@ -68,14 +69,20 @@ void Game::initializeMap()
     m_map[0][0].drawDescription();
 }
 
-void Game::drawMap()
+void Game::drawInfo()
 {
+    std::cout << CSI << MAX_MAP_HEIGHT + 1 << ";" << 1 << "H";
+    std::cout << CSI << "3M" << CSI << "3L" << std::endl;
+
+    std::cout << CYAN << "HP: " << WHITE << m_player.getHealth() << "/" << m_player.getMaxHealth() << RESET_COLOR << std::endl;
+    std::cout << CYAN << "Mana: " << WHITE << m_player.getMana() << "/200" << RESET_COLOR << std::endl;
 }
 
 // Game update loop
 void Game::update()
 {
     if (m_player.getHealth() != 0) {
+        drawInfo();
         Point2D playerPos = m_player.GetPosition();
 
         m_map[playerPos.y][playerPos.x].drawDescription();
@@ -91,6 +98,7 @@ void Game::update()
 // Gets input from the player
 void Game::getCommand()
 {
+    Tools ctools;
     Point2D playerPos = m_player.GetPosition();
 
     std::cout << "What do you want to do?\n";
@@ -106,12 +114,7 @@ void Game::getCommand()
             std::cout << CSI << "4M" << CSI << "4L" << std::endl;
             std::cout << "You can't leave this room yet!\n";
 
-            std::cout << "Press Enter to continue\n";
-            std::cin.clear();
-            std::cin.ignore(std::cin.rdbuf()->in_avail());
-            std::cout << HIDE_INPUT;
-            std::cin.get();
-            std::cout << RESET_COLOR;
+            ctools.Pause();
             std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
             std::cout << CSI << "5M" << CSI << "5L" << std::endl;
             return;
@@ -177,9 +180,8 @@ void Game::getCommand()
 
     }
 
-
-    else if (input == "give sword") {
-        m_player.pickup(WOOD_SWORD);
+    else if (input == "pickup") {
+        m_map[playerPos.y][playerPos.x].pickup(m_player);
     }
 
 

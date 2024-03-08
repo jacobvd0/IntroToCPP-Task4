@@ -13,7 +13,7 @@ public:
 	bool isGameOver();
 	bool enableVirtualTerminal();
 	void initializeMap();
-	void drawMap();
+	void drawInfo();
 
 	void update();
 

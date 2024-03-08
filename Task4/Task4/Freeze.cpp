@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameDefines.h"
 #include "Player.h"
+#include "Tools.h"
 
 Freeze::Freeze()
 {
@@ -14,6 +15,7 @@ Freeze::~Freeze()
 
 void Freeze::Cast(Room& room, Player& plr)
 {
+	Tools ctools;
 	int roomType = room.getType();
 
 	if (plr.getMana() >= m_cost) {
@@ -32,16 +34,10 @@ void Freeze::Cast(Room& room, Player& plr)
 
 			room.dealDamage(dmg);
 			std::cout << "You cast Freeze... \nIt delt " << dmg << " damage!\n";
-			std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 			std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 
-			std::cout << "Press Enter to continue\n";
-			std::cin.clear();
-			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << HIDE_INPUT;
-			std::cin.get();
-			std::cout << RESET_COLOR;
+			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 
@@ -54,12 +50,7 @@ void Freeze::Cast(Room& room, Player& plr)
 					std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 					std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
-					std::cout << "Press Enter to continue\n";
-					std::cin.clear();
-					std::cin.ignore(std::cin.rdbuf()->in_avail());
-					std::cout << HIDE_INPUT;
-					std::cin.get();
-					std::cout << RESET_COLOR;
+					ctools.Pause();
 					std::cout << CSI << MAX_MAP_HEIGHT + 7 << ";" << 1 << "H";
 					std::cout << CSI << "7M" << CSI << "7L" << std::endl;
 				}
@@ -76,12 +67,7 @@ void Freeze::Cast(Room& room, Player& plr)
 				std::cout << "HP: " << plr.getHealth() << "/" << plr.getMaxHealth() << "\n";
 				plr.addMana(15);
 
-				std::cout << "Press Enter to continue\n";
-				std::cin.clear();
-				std::cin.ignore(std::cin.rdbuf()->in_avail());
-				std::cout << HIDE_INPUT;
-				std::cin.get();
-				std::cout << RESET_COLOR;
+				ctools.Pause();
 				std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 				std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 			}
@@ -92,12 +78,7 @@ void Freeze::Cast(Room& room, Player& plr)
 
 			std::cout << "There's nothing to attack...\n";
 
-			std::cout << "Press Enter to continue\n";
-			std::cin.clear();
-			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << HIDE_INPUT;
-			std::cin.get();
-			std::cout << RESET_COLOR;
+			ctools.Pause();
 			std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 			std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 		}
@@ -108,12 +89,7 @@ void Freeze::Cast(Room& room, Player& plr)
 
 		std::cout << "You don't have enough mana...\n";
 
-		std::cout << "Press Enter to continue\n";
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << HIDE_INPUT;
-		std::cin.get();
-		std::cout << RESET_COLOR;
+		ctools.Pause();
 		std::cout << CSI << MAX_MAP_HEIGHT + 5 << ";" << 1 << "H";
 		std::cout << CSI << "5M" << CSI << "5L" << std::endl;
 	}

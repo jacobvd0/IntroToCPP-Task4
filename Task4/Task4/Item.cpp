@@ -1,6 +1,7 @@
 #include "Item.h"
 #include <iostream>
 #include "GameDefines.h"
+#include "Tools.h"
 
 Item::Item()
 {
@@ -13,20 +14,17 @@ Item::~Item()
 
 void Item::Use(Room& room, Player& plr)
 {
+    Tools ctools;
     std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
     std::cout << CSI << "4M" << CSI << "4L" << std::endl;
 
     std::cout << "It doesn't seem to do much.\n";
-    std::cout << "Press Enter to continue\n";
-    std::cin.clear();
-    std::cin.ignore(std::cin.rdbuf()->in_avail());
-    std::cout << HIDE_INPUT;
-    std::cin.get();
-    std::cout << RESET_COLOR;
+    ctools.Pause();
 }
 
 void Item::Inspect()
 {
+    Tools ctools;
     std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
     std::cout << CSI << "4M" << CSI << "4L" << std::endl;
     std::cout << LIGHT_GREY << "=============== " << YELLOW << "ITEM INFO" << LIGHT_GREY << " ===============" << RESET_COLOR << std::endl;
@@ -34,12 +32,7 @@ void Item::Inspect()
     std::cout << "Description: " << WHITE << m_itemDescription.CStr() << RESET_COLOR << std::endl;
     std::cout << LIGHT_GREY << "=========================================" << RESET_COLOR << std::endl;
 
-    std::cout << "Press Enter to continue\n";
-    std::cin.clear();
-    std::cin.ignore(std::cin.rdbuf()->in_avail());
-    std::cout << HIDE_INPUT;
-    std::cin.get();
-    std::cout << RESET_COLOR;
+    ctools.Pause();
     std::cout << CSI << MAX_MAP_HEIGHT + 6 << ";" << 1 << "H";
     std::cout << CSI << "6M" << CSI << "6L" << std::endl;
 }
