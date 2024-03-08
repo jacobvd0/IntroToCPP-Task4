@@ -6,6 +6,7 @@
 #include "Fireball.h"
 #include "Heal.h"
 #include "Freeze.h"
+#include "Tools.h"
 
 Player::Player()
 {
@@ -207,6 +208,29 @@ void Player::resetScore()
 	m_score = 0;
 }
 
+void Player::listItems()
+{
+	Tools ctools;
+
+	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+	std::cout << CYAN << "Inventory:\n";
+
+	for (int i = 0; i < 5; i++) {
+		switch (m_inventory[i]) {
+		case OLD_SWORD:
+			std::cout << WHITE << "Old Sword" << RESET_COLOR << std::endl;
+			break;
+		case WOOD_SWORD:
+			std::cout << WHITE << "Wooden Sword" << RESET_COLOR << std::endl;
+			break;
+		}
+	}
+	ctools.Pause();
+	std::cout << CSI << MAX_MAP_HEIGHT + 8 << ";" << 1 << "H";
+	std::cout << CSI << "8M" << CSI << "8L" << std::endl;
+}
+
 void Player::executeSpell(String& spell, Room& room, Player& plr)
 {
 	if (spell.EqualTo("fireball")) {
@@ -222,4 +246,20 @@ void Player::executeSpell(String& spell, Room& room, Player& plr)
 		spell.Cast(room, plr);
 	}
 
+}
+
+void Player::listSpells()
+{
+	Tools ctools;
+
+	std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+	std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+	std::cout << CYAN << "Your Spellbook:\n";
+
+	for (int i = 0; i < 3; i++) {
+		std::cout << WHITE << m_spellbook[i].CStr() << RESET_COLOR << std::endl;
+	}
+	ctools.Pause();
+	std::cout << CSI << MAX_MAP_HEIGHT + 8 << ";" << 1 << "H";
+	std::cout << CSI << "8M" << CSI << "8L" << std::endl;
 }

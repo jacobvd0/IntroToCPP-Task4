@@ -126,6 +126,7 @@ void Game::getCommand()
     Point2D playerPos = m_player.GetPosition();
 
     std::cout << "What do you want to do?\n";
+    std::cout << "Use " << YELLOW << "HELP" << RESET_COLOR << " to view all available commands." << RESET_COLOR << std::endl;
     std::cout << YELLOW;
     String input = input.ReadFromConsole().ToLower();
     std::cout << RESET_COLOR;
@@ -230,8 +231,27 @@ void Game::getCommand()
         }
     }
 
-    else if (input == "die") {
-        m_player.dealDamage(10000);
+    else if (input == "items") {
+        m_player.listItems();
+    }
+    else if (input == "spells") {
+        m_player.listSpells();
+    }
+
+
+    else if (input == "help") {
+        std::cout << CSI << MAX_MAP_HEIGHT + 4 << ";" << 1 << "H";
+        std::cout << CSI << "4M" << CSI << "4L" << std::endl;
+        std::cout << CYAN << "Commands:\n";
+        std::cout << WHITE << "move (up/down/left/right) - Moves you in the direction you choose.\n";
+        std::cout << "pickup - Picks up the item in the current room.\n";
+        std::cout << "use (item name) - Uses an item, use this in fights with enemies. Use items to view your items.\n";
+        std::cout << "inspect (item name) - Shows item info\n";
+        std::cout << "cast (spell name) - Casts a spell. Use the spells command to view your spells.\n" << RESET_COLOR;
+
+        ctools.Pause();
+        std::cout << CSI << MAX_MAP_HEIGHT + 8 << ";" << 1 << "H";
+        std::cout << CSI << "8M" << CSI << "8L" << std::endl;
     }
 
 

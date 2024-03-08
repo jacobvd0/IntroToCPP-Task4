@@ -35,6 +35,9 @@ public:
 	void addScore(int score);
 	int getScore();
 	void resetScore();
+
+	void listItems();
+	void listSpells();
 private:
 	Point2D m_playerPos;
 	int m_inventory[5];

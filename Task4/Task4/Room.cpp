@@ -159,7 +159,6 @@ void Room::pickup(Player& plr)
 			if (plr.pickup(item)) {
 				m_type = EMPTY;
 				String itemName;
-				std::cout << item;
 				switch (item) {
 				case OLD_SWORD:
 					itemName = "Old Sword";
