@@ -208,6 +208,11 @@ void Game::getCommand()
         }
     }
 
+    // Standalone attack (deals 2 damage)
+    else if (input.Find("attack") == 0) {
+        m_player.attack(m_map[playerPos.y][playerPos.x], m_player);
+    }
+
     // Checks if the player wants to inspect an item
     else if (input.Find("inspect") == 0) {
         if (input.Find("old sword") != -1) {
