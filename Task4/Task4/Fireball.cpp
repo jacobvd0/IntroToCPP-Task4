@@ -28,7 +28,7 @@ void Fireball::Cast(Room& room, Player& plr)
 			int dmg = 10;
 
 			room.dealDamage(dmg);
-			std::cout << "You cast Fireball... \nIt delt " << dmg << " damage!\n";
+			std::cout << "You cast Fireball... \nIt dealt " << dmg << " damage!\n";
 			std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 

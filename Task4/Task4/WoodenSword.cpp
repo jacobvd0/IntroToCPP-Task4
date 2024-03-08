@@ -26,7 +26,7 @@ void WoodenSword::Use(Room& room, Player& plr)
 		int dmg = (rand() % m_dmgMax) + m_dmgMin;
 
 		room.dealDamage(dmg);
-		std::cout << "You used your wooden sword... \nIt delt " << dmg << " damage!\n";
+		std::cout << "You used your wooden sword... \nIt dealt " << dmg << " damage!\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 

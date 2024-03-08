@@ -28,7 +28,7 @@ void OldSword::Use(Room& room, Player& plr)
 		int dmg = (rand() % 5) + 2;
 
 		room.dealDamage(dmg);
-		std::cout << "You used your old sword... \nIt delt " << dmg << " damage!\n";
+		std::cout << "You used your old sword... \nIt dealt " << dmg << " damage!\n";
 		std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 

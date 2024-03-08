@@ -33,7 +33,7 @@ void Freeze::Cast(Room& room, Player& plr)
 			int dmg = 5;
 
 			room.dealDamage(dmg);
-			std::cout << "You cast Freeze... \nIt delt " << dmg << " damage!\n";
+			std::cout << "You cast Freeze... \nIt dealt " << dmg << " damage!\n";
 			std::cout << "Enemy HP: " << room.getEnemyHP() << "/" << room.getEnemyMaxHP() << std::endl;
 
 
