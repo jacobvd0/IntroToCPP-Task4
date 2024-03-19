@@ -244,28 +244,49 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	int spellbookLength = 3;
 
 	// Remove 1 due to arrays starting at 0
-	spellbookLength--;
+	//spellbookLength--;
 
-	// Binary search to check if the player owns that spell
-	if (m_spellbook[spellbookLength / 2] > spell) {
-		// search up
-		for (int i = spellbookLength / 2; i <= spellbookLength; i++) {
-			if (m_spellbook[i].EqualTo(spell)) {
-				executeSpell(spell, room, plr);
-			}
+	//// Binary search to check if the player owns that spell
+	//if (m_spellbook[spellbookLength / 2] > spell) {
+	//	// search up
+	//	for (int i = spellbookLength / 2; i <= spellbookLength; i++) {
+	//		if (m_spellbook[i].EqualTo(spell)) {
+	//			executeSpell(spell, room, plr);
+	//		}
+	//	}
+	//}
+	//else if (m_spellbook[spellbookLength / 2].EqualTo(spell)) {
+	//	executeSpell(spell, room, plr);
+	//}
+	//else {
+	//	// search down
+	//	for (int i = spellbookLength / 2; i >= 0; i--) {
+	//		if (m_spellbook[i].EqualTo(spell)) {
+	//			executeSpell(spell, room, plr);
+	//		}
+	//	}
+	//}
+
+	int l = 0;
+	int r = spellbookLength-1;
+	while (true) {
+		int middle = (l + r) / 2;
+		if (m_spellbook[middle].EqualTo(spell)) {
+			executeSpell(spell, room, plr);
+			break;
+		}
+		else if (m_spellbook[middle] < m_spellbook[r]) {
+			l = middle;
+		}
+		else if (m_spellbook[middle] < m_spellbook[l]) {
+			r = middle;
+		}
+		else {
+			//std::cout << "No conditions met\nMiddle: " << middle << "\nL: " << l << "\nR: " << r << std::endl;
+			l++;
 		}
 	}
-	else if (m_spellbook[spellbookLength / 2].EqualTo(spell)) {
-		executeSpell(spell, room, plr);
-	}
-	else {
-		// search down
-		for (int i = spellbookLength / 2; i >= 0; i--) {
-			if (m_spellbook[i].EqualTo(spell)) {
-				executeSpell(spell, room, plr);
-			}
-		}
-	}
+
 }
 
 // Returns the number of enemies the player has killed
