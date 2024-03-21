@@ -41,6 +41,26 @@ String::String(const String& _other)
 	);
 }
 
+String::String(String&& other)
+{
+	//// Get the length of the inputted string + 1 to store \0
+	//int length = strlen(other.CStr()) + 1;
+
+	//// Make a new char array with the length
+	//m_string = new char[length];
+
+	//// Copy it to the new array
+	//strcpy_s(
+	//	m_string,
+	//	length,
+	//	other.CStr()
+	//);
+
+	m_string = other.m_string;
+	other.m_string = nullptr;
+
+}
+
 // Destructor
 String::~String()
 {
@@ -402,9 +422,39 @@ String& String::operator=(const String& _str)
 	);
 
 	// Convert the array to a string
-	String tmpString = m_string;
+	//String tmpString = m_string;
 
-	return tmpString;
+	return *this;
+}
+
+String& String::operator=(String&& _str)
+{
+	//// Get the length of the inputted string + 1 to store \0
+	//int length = strlen(_str.CStr()) + 1;
+
+	//// Remove the old string
+	//delete[] m_string;
+
+	//// Setup a new array
+	//m_string = new char[length];
+
+	//// Copy it to the new array
+	//strcpy_s(
+	//	m_string,
+	//	length,
+	//	_str.CStr()
+	//);
+
+	//// Convert the array to a string
+	//String tmpString = m_string;
+
+	//return tmpString;
+
+	delete[] m_string;
+	m_string = _str.m_string;
+	_str.m_string = nullptr;
+
+	return *this;
 }
 
 

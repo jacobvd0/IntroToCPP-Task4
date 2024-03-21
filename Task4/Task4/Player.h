@@ -3,6 +3,7 @@
 //#include "OldSword.h"
 #include "Room.h"
 #include "String.h"
+#include <vector>
 
 class Player
 {
@@ -45,7 +46,8 @@ private:
 	int m_inventory[5];
 	int m_health = 100;
 	int m_maxhealth = 100;
-	String m_spellbook[3] = {"fireball", "freeze", "heal"};
+	//String m_spellbook[3] = {"fireball", "freeze", "heal"};
+	std::vector<String> m_newSpellBook;
 	int m_mana = 100;
 	int m_maxMana = 200;
 

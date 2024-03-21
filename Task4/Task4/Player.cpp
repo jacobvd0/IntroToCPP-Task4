@@ -8,6 +8,7 @@
 #include "Freeze.h"
 #include "Tools.h"
 #include "HealthPotion.h"
+#include <algorithm>
 
 Player::Player()
 {
@@ -16,6 +17,9 @@ Player::Player()
 		m_inventory[i] = EMPTY;
 	}
 	m_enemyKills = 0;
+	m_newSpellBook.push_back("fireball");
+	m_newSpellBook.push_back("heal");
+	m_newSpellBook.push_back("freeze");
 }
 
 Player::Player(Point2D pos)
@@ -25,6 +29,9 @@ Player::Player(Point2D pos)
 		m_inventory[i] = EMPTY;
 	}
 	m_enemyKills = 0;
+	m_newSpellBook.push_back("fireball");
+	m_newSpellBook.push_back("heal");
+	m_newSpellBook.push_back("freeze");
 }
 
 Player::Player(int x, int y)
@@ -34,6 +41,9 @@ Player::Player(int x, int y)
 		m_inventory[i] = EMPTY;
 	}
 	m_enemyKills = 0;
+	m_newSpellBook.push_back("fireball");
+	m_newSpellBook.push_back("heal");
+	m_newSpellBook.push_back("freeze");
 }
 
 Player::~Player()
@@ -243,6 +253,9 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	// Length of the spellbook
 	int spellbookLength = 3;
 
+	
+
+
 	// Remove 1 due to arrays starting at 0
 	//spellbookLength--;
 
@@ -265,25 +278,30 @@ void Player::castSpell(String& spell, Room& room, Player& plr)
 	//			executeSpell(spell, room, plr);
 	//		}
 	//	}
-	//}
+	//} 
+
+	//std::sort(m_spellbook[0], m_spellbook[spellbookLength - 1]);
+	std::sort(m_newSpellBook.begin(), m_newSpellBook.end());
 
 	int l = 0;
 	int r = spellbookLength-1;
+
 	while (true) {
 		int middle = (l + r) / 2;
-		if (m_spellbook[middle].EqualTo(spell)) {
+		if (m_newSpellBook[middle].EqualTo(spell)) {
 			executeSpell(spell, room, plr);
 			break;
 		}
-		else if (m_spellbook[middle] < m_spellbook[r]) {
-			l = middle;
+		else if (m_newSpellBook[middle] < spell) {
+			l = middle + 1;
 		}
-		else if (m_spellbook[middle] < m_spellbook[l]) {
-			r = middle;
-		}
+		/*else if (m_newSpellBook[middle] < spell) {
+			r = middle - 1;
+		}*/
 		else {
 			//std::cout << "No conditions met\nMiddle: " << middle << "\nL: " << l << "\nR: " << r << std::endl;
-			l++;
+			//l++;
+			r = middle - 1;
 		}
 	}
 
@@ -372,7 +390,7 @@ void Player::listSpells()
 	std::cout << CYAN << "Your Spellbook:\n";
 
 	for (int i = 0; i < 3; i++) {
-		std::cout << WHITE << m_spellbook[i].CStr() << RESET_COLOR << std::endl;
+		std::cout << WHITE << m_newSpellBook[i].CStr() << RESET_COLOR << std::endl;
 	}
 	ctools.Pause();
 	std::cout << CSI << MAX_MAP_HEIGHT + 8 << ";" << 1 << "H";

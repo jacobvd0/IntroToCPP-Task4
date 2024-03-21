@@ -7,6 +7,7 @@ public:
 	String();
 	String(const char* _str);
 	String(const String& _other);
+	String(String&& other);
 	~String();
 
 
@@ -31,6 +32,7 @@ public:
 	bool operator>(const String& _other);
 	bool operator>=(const String& _other);
 	String& operator=(const String& _str);
+	String& operator=(String&& _str);
 	char& operator[](size_t _index);
 	const char& operator[](size_t _index) const;
 private:
